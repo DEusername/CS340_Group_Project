@@ -7,7 +7,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Drop tables in order, such that tables with fks are
 -- 		dropped before the tables the fk belong to.
 -- --------------------------------------------------
-DROP TABLE IF EXISTS Sale_Has_Clothes;
+DROP TABLE IF EXISTS SaleHasClothes;
 DROP TABLE IF EXISTS Sales;
 DROP TABLE IF EXISTS Clothes;
 DROP TABLE IF EXISTS Manufacturers;
@@ -44,11 +44,15 @@ CREATE TABLE Sales (
   idSale INT AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
   discountPercent DECIMAL(5, 2),
   payment DECIMAL(11, 2) NOT NULL,
-  date DATE NOT NULL,
+  date DATETIME NOT NULL,
   Customers_idCustomer INT NOT NULL,
   Employees_idEmployee INT NOT NULL,
-  FOREIGN KEY (Customers_idCustomer) REFERENCES Customers(idCustomer),
-  FOREIGN KEY (Employees_idEmployee) REFERENCES Employees(idEmployee)
+  FOREIGN KEY (Customers_idCustomer) 
+    REFERENCES Customers(idCustomer)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (Employees_idEmployee) 
+    REFERENCES Employees(idEmployee)
+    ON DELETE RESTRICT
 );
 
 -- --------------------------------------------------
@@ -74,19 +78,25 @@ CREATE TABLE Clothes (
   purchaseCost DECIMAL(11, 2) NOT NULL,
   stock INT NOT NULL,
   Manufacturers_idManufacturer INT,
-  FOREIGN KEY (Manufacturers_idManufacturer) REFERENCES Manufacturers(idManufacturer)
+  FOREIGN KEY (Manufacturers_idManufacturer) 
+    REFERENCES Manufacturers(idManufacturer) 
+    ON DELETE SET NULL
 );
 
 -- --------------------------------------------------
--- Sale_Has_Clothes table
+-- SaleHasClothes table
 -- --------------------------------------------------
-CREATE TABLE Sale_Has_Clothes (
+CREATE TABLE SaleHasClothes (
   idSaleHasClothes INT AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
   Sales_idSales INT NOT NULL,
   Clothes_idClothes INT NOT NULL,
   quantity INT NOT NULL,
-  FOREIGN KEY (Sales_idSales) REFERENCES Sales(idSale),
-  FOREIGN KEY (Clothes_idClothes) REFERENCES Clothes(idClothes)
+  FOREIGN KEY (Sales_idSales) 
+    REFERENCES Sales(idSale)
+    ON DELETE CASCADE,
+  FOREIGN KEY (Clothes_idClothes) 
+    REFERENCES Clothes(idClothes)
+    ON DELETE RESTRICT
 );
 
 -- --------------------------------------------------
@@ -112,9 +122,27 @@ VALUES
 -- --------------------------------------------------
 INSERT INTO Sales (discountPercent, payment, date, Customers_idCustomer, Employees_idEmployee)  
 VALUES 
-(0.10, 9.89, '2018-03-21', 1, 1),
-(0.25, 40.88, '2023-07-05', 2, 2),
-(0.05, 20.89, '2024-09-29', 3, 3);
+(
+  0.10, 
+  9.89, 
+  '2018-03-21 14:30:00', 
+  (SELECT idCustomer FROM Customers WHERE firstName = 'Ben' AND lastName = 'Gulbranson'), 
+  (SELECT idEmployee FROM Employees WHERE firstName = 'Alexander' AND lastName = 'Addis')
+),
+(
+  0.25, 
+  40.88, 
+  '2023-07-05 15:20:00', 
+  (SELECT idCustomer FROM Customers WHERE firstName = 'Parsa' AND lastName = 'Fallah'), 
+  (SELECT idEmployee FROM Employees WHERE firstName = 'Duncan' AND lastName = 'Everson')
+),
+(
+  0.05, 
+  20.89, 
+  '2024-09-29 09:30:00', 
+  (SELECT idCustomer FROM Customers WHERE firstName = 'Jade' AND lastName = 'Carey'), 
+  (SELECT idEmployee FROM Employees WHERE firstName = 'Benny' AND lastName = 'Beaver')
+);
 
 -- --------------------------------------------------
 -- Insert sample data into Manufacturers table
@@ -130,17 +158,53 @@ VALUES
 -- --------------------------------------------------
 INSERT INTO Clothes (name, category, size, price, purchaseCost, stock, Manufacturers_idManufacturer)  
 VALUES 
-('Shirt', 'Tops', 'Medium', 10.99, 9.89, 1, 1),
-('Coat', 'Outerwear', 'Large', 54.50, 40.88, 1, 2),
-('Pants', 'Bottoms', 'Small', 21.99, 20.89, 1, 3);
+(
+  'Shirt', 
+  'Tops', 
+  'Medium', 
+  10.99, 
+  9.89, 
+  1, 
+  (SELECT idManufacturer FROM Manufacturers WHERE name = 'Gucci')
+),
+(
+  'Coat', 
+  'Outerwear', 
+  'Large', 
+  54.50, 
+  40.88, 
+  1, 
+  (SELECT idManufacturer FROM Manufacturers WHERE name = 'Versace')
+),
+(
+  'Pants', 
+  'Bottoms', 
+  'Small', 
+  21.99, 
+  20.89, 
+  1, 
+  (SELECT idManufacturer FROM Manufacturers WHERE name = 'Prada')
+);
 
 -- --------------------------------------------------
--- Insert sample data into Sale_Has_Clothes table
+-- Insert sample data into SaleHasClothes table
 -- --------------------------------------------------
-INSERT INTO Sale_Has_Clothes (Sales_idSales, Clothes_idClothes, quantity)  
+INSERT INTO SaleHasClothes (Sales_idSales, Clothes_idClothes, quantity)  
 VALUES 
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 1);
+(
+  1,
+  1,
+  1
+),
+(
+  2,
+  2,
+  1
+),
+(
+  3,
+  3,
+  1
+);
 
 SET FOREIGN_KEY_CHECKS=1;
