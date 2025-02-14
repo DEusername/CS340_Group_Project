@@ -1,0 +1,279 @@
+-- : character being used to denote the variables that will have data from the 
+-- backend programming language
+
+-- --------------------------------------------------
+-- Employees Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+-- all employee display
+SELECT *
+FROM Employees;
+
+-- populate drop down menu for making a sale
+SELECT firstName, lastName
+FROM Employees;
+
+-- INSERTION
+INSERT INTO Employees (firstName, lastName, hireDate, email, phone)
+VALUES (:givenFirstName, :givenLastName, :givenHireDate, :givenEmail, :givenPhone);
+
+-- UPDATE
+UPDATE Employees
+SET firstName = :givenFirstName, lastName = :givenLastName,
+  hireDate = :givenHireDate, email = :givenEmail, phone = :givenPhone
+WHERE idEmployee = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM Employees 
+WHERE firstName = :givenFirstName AND lastName = :givenLastName;
+
+-- --------------------------------------------------
+-- Customer Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+-- all customer display
+SELECT *
+FROM Customers;
+
+-- populate drop down menu for making a sale
+SELECT firstName, lastName
+FROM Customers;
+
+-- INSERTION
+INSERT INTO Customers (firstName, lastName, email, phone)
+VALUES (:givenFirstName, :givenLastName, :givenEmail, :givenPhone);
+
+-- UPDATE
+UPDATE Customers
+SET firstName = :givenFirstName, lastName = :givenLastName,
+  email = :givenEmail, phone = :givenPhone
+WHERE idCustomer = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM Customers 
+WHERE firstName = :givenFirstName AND lastName = :givenLastName;
+
+-- --------------------------------------------------
+-- Sales Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+-- all Sales display
+SELECT *
+FROM Sales;
+
+-- populate drop down menu for making a SaleHasClothes entry
+SELECT Customers.firstName, Customers.lastName, Sales.date
+FROM Sales
+INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer;
+
+-- INSERTION
+INSERT INTO Sales (discountPercent, payment, date, Customers_idCustomer, Employees_idEmployee)
+VALUES 
+(
+  :givenDiscountPercentage, 
+  :givenPayment, 
+  :givenDate, 
+  (
+    SELECT idCustomer
+    FROM Customers
+    WHERE firstName = :givenCusFirstName 
+    AND lastName = :givenCusLastName
+  ), 
+  (
+    SELECT idEmployee
+    FROM Employees
+    WHERE firstName = :givenEmpFirstName
+    AND lastName = :givenEmpLastName
+  )
+);
+
+-- UPDATE
+UPDATE Sales
+SET discountPercent = :givenDiscountPercentage, 
+  payment = :givenPayment,
+  date = :givenDate,
+  Customers_idCustomer = 
+  (
+    SELECT idCustomer
+    FROM Customers
+    WHERE firstName = :givenCusFirstName 
+    AND lastName = :givenCusLastName
+  ),
+  Employees_idEmployee = 
+  (
+    SELECT idEmployee
+    FROM Employees
+    WHERE firstName = :givenEmpFirstName
+    AND lastName = :givenEmpLastName
+  )
+WHERE idCustomer = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM Sales 
+WHERE Customers_idCustomer = :givenCustomerIdFromForm
+AND date = :givenDateFromForm;
+
+-- --------------------------------------------------
+-- Manufacturer Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+-- all manufacturers display
+SELECT *
+FROM Manufacturers;
+
+-- populate drop down menu for making a Clothes item
+SELECT name
+FROM Manufacturers;
+
+-- INSERTION
+INSERT INTO Manufacturers (name, email, phone, address)
+VALUES (:givenName, :givenEmail, :givenPhone, :givenAddress);
+
+-- UPDATE
+UPDATE Manufacturers
+SET name = :givenName, email = :givenEmail,
+  phone = :givenPhone, address = :givenAddress
+WHERE idManufacturer = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM Manufacturers 
+WHERE name = :givenName;
+
+-- --------------------------------------------------
+-- Clothes Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+-- all Clothes display
+SELECT *
+FROM Clothes;
+
+-- populate drop down menu for making a SaleHasClothes entry
+SELECT Clothes.name, Clothes.size, Manufacturer.name
+FROM Clothes
+INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturer.idManufacturer;
+
+-- INSERTION
+INSERT INTO Clothes (name, category, size, price, purchaseCost, stock, Manufacturers_idManufacturer)
+VALUES 
+(
+  :givenName, 
+  :givenCategory, 
+  :givenSize, 
+  :givenPrice,
+  :givenPurchaseCost,
+  :givenStock,
+  (
+    SELECT idManufacturer
+    FROM Manufacturer
+    WHERE name = :givenManuName
+  )
+);
+
+-- UPDATE
+UPDATE Clothes
+SET name = :givenName, 
+  category = :givenCategory, 
+  size = :givenSize, 
+  price = :givenPrice,
+  purhcaseCost = :givenPurchaseCost,
+  stock = :givenStock,
+  Manufacturers_idManufacturer = 
+  (
+    SELECT idManufacturer
+    FROM Manufacturer
+    WHERE name = :givenManuName
+  )
+WHERE idClothes = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM Clothes
+WHERE name = :givenName
+AND size = givenName
+AND Manufacturers_idManufacturer = :givenManuIdFromForm;
+
+-- --------------------------------------------------
+-- SaleHasClothes Queries
+-- --------------------------------------------------
+
+-- SELECTION 
+SELECT Customers.firstName, 
+  Customers.lastName, 
+  Sales.date, 
+  Clothes.name AS ClothesName, 
+  Manufacturers.name AS ManufacturerName, 
+  SaleHasClothes.quantity
+FROM SaleHasClothes
+INNER JOIN Sales ON SaleHasClothes.Sales_idSale = Sales.idSale
+INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+INNER JOIN Clothes ON SaleHasClothes.Clothes_idClothes = Clothes.idClothes
+INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer;
+
+-- INSERTION
+INSERT INTO SaleHasClothes (Sales_idSale, Clothes_idClothes, quantity)
+VALUES 
+(
+  (
+    SELECT Sales.idSale
+    FROM Sales
+    INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomers
+    WHERE Sales.date = :givenDate 
+    AND Customers.firstName = :givenFirstName
+    AND Customers.lastName = :givenLastName
+  ), 
+  (
+    SELECT Clothes.idClothes
+    FROM Clothes
+    INNER JOIN Manufacturer ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+    WHERE Clothes.name = :givenClothesName 
+    AND Clothes.size = :givenSize
+    AND Manufacturers.name = :givenManuName
+  )
+  :givenQuantity 
+);
+
+-- UPDATE
+UPDATE SaleHasClothes
+SET Sales_idSale =
+  (
+    SELECT Sales.idSale
+    FROM Sales
+    INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomers
+    WHERE Sales.date = :givenDate 
+    AND Customers.firstName = :givenFirstName
+    AND Customers.lastName = :givenLastName
+  ), 
+  Clothes_idClothes = 
+  (
+    SELECT Clothes.idClothes
+    FROM Clothes
+    INNER JOIN Manufacturer ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+    WHERE Clothes.name = :givenClothesName 
+    AND Clothes.size = :givenSize
+    AND Manufacturers.name = :givenManuName
+  ), 
+  quantity = :givenQuantity
+WHERE idSaleHasClothes = :givenIdFromForm;
+
+-- DELETE
+DELETE FROM SaleHasClothes
+WHERE Sales_idSale = (
+  SELECT idSale
+  FROM Sales
+  INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+  WHERE Sales.date = :givenDate 
+  AND Customers.firstName = :givenFirstName
+  AND Customers.lastName = :givenLastName
+)
+AND Clothes_idClothes = (
+  SELECT idClothes
+  FROM Clothes
+  INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+  WHERE Clothes.name = :givenClothesName 
+  AND Clothes.size = :givenSize
+  AND Manufacturers.name = :givenManuName
+);
