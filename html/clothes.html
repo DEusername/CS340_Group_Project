@@ -66,7 +66,12 @@
                     <label> price </label> <input type="text" name="price">
                     <label> purchace cost </label> <input type="text" name="purchaseCost">
                     <label> stock </label> <input type="text" name="stock">
-                    <label> manufacturer's id </label> <input type="text" name="Manufacturers_idManufacturers">
+                    <label> manufacturer </label> <select name="manufacturer">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Gucci</option>
+                        <option value="2">Versace</option>
+                        <option value="3">Prada</option>
+                        </select>                 
                 </fieldset>
                     <input class="btn" type="submit" id="addClothes" value="Add clothes">
                     <input class="btn" type="button" value="cancel">
@@ -85,7 +90,12 @@
                     <label> price </label> <input type="text" name="price">
                     <label> purchace cost </label> <input type="text" name="purchaseCost">
                     <label> stock </label> <input type="text" name="stock">
-                    <label> manufacturer's id </label> <input type="text" name="Manufacturers_idManufacturers">
+                    <label> manufacturer </label> <select name="manufacturer">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Gucci</option>
+                        <option value="2">Versace</option>
+                        <option value="3">Prada</option>
+                        </select>                
                 </fieldset>
                     <input class="btn" type="submit" id="updateClothes" value="Update clothes">
                     <input class="btn" type="button" value="cancel">
@@ -97,13 +107,10 @@
         <form method="POST" id="deleteClothes">
             <legend><strong>Delete clothes</strong></legend>
                 <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="clothesID" id="deleteClothesID" value="1">
-                <label><strong>ID:</strong></label>
-                    <label> <strong>Name</strong> </label>
+                <label> ID </label> <input type="text" name="clothesID">
                     
             </fieldset>
-            <input class="btn" type="submit" id="DeleteEmployee" value="Delete Clothes">
+            <input class="btn" type="submit" id="DeleteClothes" value="Delete Clothes">
                 <input class="btn" type="button" value="cancel">
         </form> 
         </div>
