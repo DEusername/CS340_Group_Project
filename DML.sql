@@ -214,45 +214,15 @@ INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers
 INSERT INTO SaleHasClothes (Sales_idSale, Clothes_idClothes, quantity)
 VALUES 
 (
-  (
-    SELECT Sales.idSale
-    FROM Sales
-    INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomers
-    WHERE Sales.date = :givenDate 
-    AND Customers.firstName = :givenFirstName
-    AND Customers.lastName = :givenLastName
-  ), 
-  (
-    SELECT Clothes.idClothes
-    FROM Clothes
-    INNER JOIN Manufacturer ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
-    WHERE Clothes.name = :givenClothesName 
-    AND Clothes.size = :givenSize
-    AND Manufacturers.name = :givenManuName
-  )
+  :givenSalesId
+  :givenClothesId
   :givenQuantity 
 );
 
 -- UPDATE
 UPDATE SaleHasClothes
-SET Sales_idSale =
-  (
-    SELECT Sales.idSale
-    FROM Sales
-    INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomers
-    WHERE Sales.date = :givenDate 
-    AND Customers.firstName = :givenFirstName
-    AND Customers.lastName = :givenLastName
-  ), 
-  Clothes_idClothes = 
-  (
-    SELECT Clothes.idClothes
-    FROM Clothes
-    INNER JOIN Manufacturer ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
-    WHERE Clothes.name = :givenClothesName 
-    AND Clothes.size = :givenSize
-    AND Manufacturers.name = :givenManuName
-  ), 
+SET Sales_idSale = :givenSalesIdFromForm
+  Clothes_idClothes = :givenClothesIdFromForm
   quantity = :givenQuantity
 WHERE idSaleHasClothes = :givenIdFromForm;
 
