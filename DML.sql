@@ -26,7 +26,7 @@ WHERE idEmployee = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Employees 
-WHERE firstName = :givenFirstName AND lastName = :givenLastName;
+WHERE idEmployee = :givenIdFromForm;
 
 -- --------------------------------------------------
 -- Customer Queries
@@ -53,7 +53,7 @@ WHERE idCustomer = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Customers 
-WHERE firstName = :givenFirstName AND lastName = :givenLastName;
+WHERE idCustomer = :givenIdFromForm;
 
 -- --------------------------------------------------
 -- Sales Queries
@@ -113,8 +113,7 @@ WHERE idCustomer = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Sales 
-WHERE Customers_idCustomer = :givenCustomerIdFromForm
-AND date = :givenDateFromForm;
+WHERE idSale = :givenIdFromForm;;
 
 -- --------------------------------------------------
 -- Manufacturer Queries
@@ -141,7 +140,7 @@ WHERE idManufacturer = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Manufacturers 
-WHERE name = :givenName;
+WHERE idManufacturer = :givenIdFromForm;
 
 -- --------------------------------------------------
 -- Clothes Queries
@@ -192,9 +191,7 @@ WHERE idClothes = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Clothes
-WHERE name = :givenName
-AND size = givenName
-AND Manufacturers_idManufacturer = :givenManuIdFromForm;
+WHERE idClothes = :givenIdFromForm;;
 
 -- --------------------------------------------------
 -- SaleHasClothes Queries
@@ -261,19 +258,4 @@ WHERE idSaleHasClothes = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM SaleHasClothes
-WHERE Sales_idSale = (
-  SELECT idSale
-  FROM Sales
-  INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
-  WHERE Sales.date = :givenDate 
-  AND Customers.firstName = :givenFirstName
-  AND Customers.lastName = :givenLastName
-)
-AND Clothes_idClothes = (
-  SELECT idClothes
-  FROM Clothes
-  INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
-  WHERE Clothes.name = :givenClothesName 
-  AND Clothes.size = :givenSize
-  AND Manufacturers.name = :givenManuName
-);
+WHERE idSaleHasClothes = :givenIdFromForm;
