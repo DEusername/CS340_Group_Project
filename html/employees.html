@@ -46,5 +46,55 @@
                 </tr>
             </table>
         </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addEmployee">
+                <legend><strong>Add employee</strong></legend>
+                <fieldset class="fields">
+                    <label> first name </label> <input type="text" name="firstName">
+                    <label> last name </label> <input type="text" name="lastName">
+                    <label> hire date </label> <input type="text" name="hireDate">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                </fieldset>
+                    <input class="btn" type="submit" id="addEmployee" value="Add employee">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="updateEmployee">
+                <legend><strong>Update employee</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idEmployee" id="updateEmployeeID">
+                    <label> first name </label> <input type="text" name="firstName">
+                    <label> last name </label> <input type="text" name="lastName">
+                    <label> hire date </label> <input type="text" name="hireDate">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateEmployee" value="Save update employee">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteEmployee">
+            <legend><strong>Delete employee</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="employeeID" id="deleteEmployeeID" value="1">
+                <label><strong>ID:</strong></label>
+                    <label> <strong>Name</strong> </label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteEmployee" value="Delete Employee">
+                <input class="btn" type="button" value="cancel">
+        </form> 
+        </div>
+
     </body>
 </html>

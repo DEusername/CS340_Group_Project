@@ -54,5 +54,59 @@
                 </tr>
             </table>
         </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addClothes">
+                <legend><strong>Add clothes</strong></legend>
+                <fieldset class="fields">
+                    <label> name </label> <input type="text" name="name">
+                    <label> category </label> <input type="text" name="category">
+                    <label> size </label> <input type="text" name="size">
+                    <label> price </label> <input type="text" name="price">
+                    <label> purchace cost </label> <input type="text" name="purchaseCost">
+                    <label> stock </label> <input type="text" name="stock">
+                    <label> manufacturer's id </label> <input type="text" name="Manufacturers_idManufacturers">
+                </fieldset>
+                    <input class="btn" type="submit" id="addClothes" value="Add clothes">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="updateClothes">
+                <legend><strong>Update clothes</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idClothes" id="updateClothesID">
+                    <label> name </label> <input type="text" name="name">
+                    <label> category </label> <input type="text" name="category">
+                    <label> size </label> <input type="text" name="size">
+                    <label> price </label> <input type="text" name="price">
+                    <label> purchace cost </label> <input type="text" name="purchaseCost">
+                    <label> stock </label> <input type="text" name="stock">
+                    <label> manufacturer's id </label> <input type="text" name="Manufacturers_idManufacturers">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateClothes" value="Update clothes">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteClothes">
+            <legend><strong>Delete clothes</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="clothesID" id="deleteClothesID" value="1">
+                <label><strong>ID:</strong></label>
+                    <label> <strong>Name</strong> </label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteEmployee" value="Delete Clothes">
+                <input class="btn" type="button" value="cancel">
+        </form> 
+        </div>
+
     </body>
 </html>

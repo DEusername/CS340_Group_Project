@@ -42,5 +42,53 @@
                 </tr>
             </table>
         </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addCustomer">
+                <legend><strong>Add customer</strong></legend>
+                <fieldset class="fields">
+                    <label> first name </label> <input type="text" name="firstName">
+                    <label> last name </label> <input type="text" name="lastName">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                </fieldset>
+                    <input class="btn" type="submit" id="addEmployee" value="Add customer">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="UpdateCustomer">
+                <legend><strong>Update customer</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idCustomer" id="updateCustomerID">
+                    <label> first name </label> <input type="text" name="firstName">
+                    <label> last name </label> <input type="text" name="lastName">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateCustomer" value="Save update customer">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteCustomer">
+            <legend><strong>Delete Customer</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="employeeID" id="deleteCustomerID" value="1">
+                <label><strong>ID:</strong></label>
+                    <label> <strong>Name</strong> </label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteCustomer" value="Delete Customer">
+                <input class="btn" type="button" value="cancel">
+        </form> 
+        </div>
+
     </body>
 </html>

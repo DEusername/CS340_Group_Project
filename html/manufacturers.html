@@ -42,5 +42,52 @@
                 </tr>
             </table>
         </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addManufacturer">
+                <legend><strong>Add manufacturer</strong></legend>
+                <fieldset class="fields">
+                    <label> name </label> <input type="text" name="name">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                    <label> address </label> <input type="text" name="address">
+                </fieldset>
+                    <input class="btn" type="submit" id="addManufacturer" value="Add manufacturer">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="updateManufacturer">
+                <legend><strong>Update manufacturer</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idManufacturer" id="updateManufacturerID">
+                    <label> name </label> <input type="text" name="name">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone # </label> <input type="text" name="phone">
+                    <label> address </label> <input type="text" name="address">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateManufacturer" value="Update manufacturer">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteManufacturer">
+            <legend><strong>Delete manufacturer</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="manufacturerID" id="deleteManufacturerID" value="1">
+                <label><strong>ID:</strong></label>
+                    <label> <strong>Name</strong> </label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteManufacturer" value="Delete Manufacturer">
+                <input class="btn" type="button" value="cancel">
+        </form> 
+        </div>
     </body>
 </html>

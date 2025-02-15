@@ -24,7 +24,7 @@
                     <th>1</th>
                     <th>0.1</th>
                     <th>9.89</th>
-                    <th>03/21/2018</th>
+                    <th>03/21/2018 14:30:00</th>
                     <th>1</th>
                     <th>1</th>
                 </tr>
@@ -32,7 +32,7 @@
                     <th>2</th>
                     <th>0.25</th>
                     <th>40.88</th>
-                    <th>07/05/2023</th>
+                    <th>07/05/2023 15:20:00</th>
                     <th>2</th>
                     <th>2</th>
                 </tr>
@@ -40,11 +40,60 @@
                     <th>3</th>
                     <th>0.05</th>
                     <th>20.89</th>
-                    <th>09/29/2024</th>
+                    <th>09/29/2024 09:30:00</th>
                     <th>3</th>
                     <th>3</th>
                 </tr>
             </table>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addSale">
+                <legend><strong>Add sale</strong></legend>
+                <fieldset class="fields">
+                    <label> discount percent </label> <input type="text" name="discountPercent">
+                    <label> payment </label> <input type="text" name="payment">
+                    <label> date/time </label> <input type="text" name="date">
+                    <label> customer id </label> <input type="text" name="Customers_idCustomer">
+                    <label> employeed id </label> <input type="text" name="Employees_idEmployees">
+                </fieldset>
+                    <input class="btn" type="submit" id="addSale" value="Add sale">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="updateSale">
+                <legend><strong>Add sale</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idSale" id="updateSale">
+                    <label> discount percent </label> <input type="text" name="discountPercent">
+                    <label> payment </label> <input type="text" name="payment">
+                    <label> date/time </label> <input type="text" name="date">
+                    <label> customer id </label> <input type="text" name="Customers_idCustomer">
+                    <label> employeed id </label> <input type="text" name="Employees_idEmployees">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateSale" value="Update sale">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteSale">
+            <legend><strong>Delete sale</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="saleID" id="deleteSaleID" value="1">
+                <label><strong>ID:</strong></label>
+                    <label> <strong>Name</strong> </label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteSale" value="Delete Sale">
+                <input class="btn" type="button" value="cancel">
+        </form> 
         </div>
     </body>
 </html>

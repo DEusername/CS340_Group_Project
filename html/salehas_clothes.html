@@ -38,5 +38,50 @@
                 </tr>
             </table>
         </div>
+
+        <p>&nbsp;</p>
+        <div id="insert">
+            <form method="POST" id="addSaleHasClothes">
+                <legend><strong>Add sale with clothes</strong></legend>
+                <fieldset class="fields">
+                    <label> sale id </label> <input type="text" name="Sales_idSales">
+                    <label> clothes id </label> <input type="text" name="Clothes_idClothes">
+                    <label> quantity </label> <input type="text" name="quantity">
+                </fieldset>
+                    <input class="btn" type="submit" id="addSaleHasClothes" value="Add sale with clothes">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="update">
+            <form method="POST" id="updateSaleHasClothes">
+                <legend><strong>Update sale with clothes</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="idSaleHasClothes" id="updateSaleHasClothes">
+                    <label> sale id </label> <input type="text" name="Sales_idSales">
+                    <label> clothes id </label> <input type="text" name="Clothes_idClothes">
+                    <label> quantity </label> <input type="text" name="quantity">
+                </fieldset>
+                    <input class="btn" type="submit" id="updateSaleHasClothes" value="Update sale with clothes">
+                    <input class="btn" type="button" value="cancel">
+            </form>
+        </div>
+
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block">
+        <form method="POST" id="deleteSaleHasClothes">
+            <legend><strong>Delete sale with clothes</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="idSaleHasClothes" id="deleteidSaleHasClothes" value="1">
+                <label><strong>ID:</strong></label>
+                    
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteSaleHasClothes" value="Delete sale with clothes">
+                <input class="btn" type="button" value="cancel">
+        </form> 
+        </div>
+
     </body>
 </html>
