@@ -59,8 +59,18 @@
                 <legend><strong>Update sale with clothes</strong></legend>
                 <fieldset class="fields">
                     <input type="hidden" name="idSaleHasClothes" id="updateSaleHasClothes">
-                    <label> sale id </label> <input type="text" name="Sales_idSales">
-                    <label> clothes id </label> <input type="text" name="Clothes_idClothes">
+                    <label> sale id </label> <select name="Sales_idSales">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>                    
+                    <label> clothes id </label> <select name="Clothes_idClothes">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>                      
                     <label> quantity </label> <input type="text" name="quantity">
                 </fieldset>
                     <input class="btn" type="submit" id="updateSaleHasClothes" value="Update sale with clothes">
@@ -73,12 +83,10 @@
         <form method="POST" id="deleteSaleHasClothes">
             <legend><strong>Delete sale with clothes</strong></legend>
                 <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="idSaleHasClothes" id="deleteidSaleHasClothes" value="1">
-                <label><strong>ID:</strong></label>
+                <label> ID </label> <input type="text" name="salehasclothesID">
                     
             </fieldset>
-            <input class="btn" type="submit" id="DeleteSaleHasClothes" value="Delete sale with clothes">
+            <input class="btn" type="submit" id="DeleteSaleHasClothes" value="Delete SaleHasClothes">
                 <input class="btn" type="button" value="cancel">
         </form> 
         </div>

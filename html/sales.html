@@ -72,8 +72,18 @@
                     <label> discount percent </label> <input type="text" name="discountPercent">
                     <label> payment </label> <input type="text" name="payment">
                     <label> date/time </label> <input type="text" name="date">
-                    <label> customer id </label> <input type="text" name="Customers_idCustomer">
-                    <label> employeed id </label> <input type="text" name="Employees_idEmployees">
+                    <label> customer id </label> <select name="Customers_idCustomer">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>
+                    <label> employee id </label> <select name="Employees_idEmployees">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>                
                 </fieldset>
                     <input class="btn" type="submit" id="updateSale" value="Update sale">
                     <input class="btn" type="button" value="cancel">
@@ -85,10 +95,7 @@
         <form method="POST" id="deleteSale">
             <legend><strong>Delete sale</strong></legend>
                 <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="saleID" id="deleteSaleID" value="1">
-                <label><strong>ID:</strong></label>
-                    <label> <strong>Name</strong> </label>
+                <label> ID </label> <input type="text" name="saleID">
                     
             </fieldset>
             <input class="btn" type="submit" id="DeleteSale" value="Delete Sale">
