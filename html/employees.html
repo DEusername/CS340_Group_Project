@@ -68,7 +68,12 @@
             <form method="POST" id="updateEmployee">
                 <legend><strong>Update employee</strong></legend>
                 <fieldset class="fields">
-                    <input type="hidden" name="idEmployee" id="updateEmployeeID">
+                    <label> ID to update </label> <select name="ID">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                     <label> first name </label> <input type="text" name="firstName">
                     <label> last name </label> <input type="text" name="lastName">
                     <label> hire date </label> <input type="date" name="hireDate">

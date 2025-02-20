@@ -20,7 +20,7 @@
                     <th>price</th>
                     <th>purchaseCost</th>
                     <th>stock</th>
-                    <th>Manufacturers_idManufacturers</th>
+                    <th>Manufacturer</th>
                 </tr>
                 <tr>
                     <th>1</th>
@@ -29,8 +29,8 @@
                     <th>Medium</th>
                     <th>10.99</th>
                     <th>9.89</th>
-                    <th>1</th>
-                    <th>1</th>
+                    <th>y</th>
+                    <th>Gucci</th>
                 </tr>
                 <tr>
                     <th>2</th>
@@ -39,8 +39,8 @@
                     <th>Large</th>
                     <th>54.50</th>
                     <th>40.88</th>
-                    <th>1</th>
-                    <th>2</th>
+                    <th>y</th>
+                    <th>Versace</th>
                 </tr>
                 <tr>
                     <th>3</th>
@@ -49,8 +49,8 @@
                     <th>Small</th>
                     <th>21.99</th>
                     <th>20.89</th>
-                    <th>1</th>
-                    <th>3</th>
+                    <th>y</th>
+                    <th>Prada</th>
                 </tr>
                 <tr>
                     <th>4</th>
@@ -59,8 +59,8 @@
                     <th>Large</th>
                     <th>7.99</th>
                     <th>7.99</th>
-                    <th>1</th>
-                    <th>1</th>
+                    <th>y</th>
+                    <th>Gucci</th>
                 </tr>
                 <tr>
                     <th>5</th>
@@ -69,8 +69,8 @@
                     <th>Medium</th>
                     <th>10.99</th>
                     <th>10.99</th>
-                    <th>1</th>
-                    <th>3</th>
+                    <th>y</th>
+                    <th>Prada</th>
                 </tr>
             </table>
         </div>
@@ -111,8 +111,15 @@
         <div id="update">
             <form method="POST" id="updateClothes">
                 <legend><strong>Update clothes</strong></legend>
-                <fieldset class="fields">
-                    <input type="hidden" name="idClothes" id="updateClothesID">
+                <fieldset class="fields">   
+                    <label> ID to update </label> <select name="ID">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                     <label> name </label> <input type="text" name="name">
                     <label> category </label> <input type="text" name="category">
                     <label> size </label> <select name="size">

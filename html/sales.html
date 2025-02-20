@@ -17,32 +17,32 @@
                     <th>discountPercent</th>
                     <th>payment</th>
                     <th>date</th>
-                    <th>Customers_idCustomer</th>
-                    <th>Employees_idEmployees</th>
+                    <th>Customer</th>
+                    <th>Employee</th>
                 </tr>
                 <tr>
                     <th>1</th>
                     <th>0.1</th>
                     <th>9.89</th>
                     <th>03/21/2018 14:30:00</th>
-                    <th>1</th>
-                    <th>1</th>
+                    <th>Ben Gulbranson</th>
+                    <th>Alexander Addis</th>
                 </tr>
                 <tr>
                     <th>2</th>
                     <th>0.25</th>
                     <th>40.88</th>
                     <th>07/05/2023 15:20:00</th>
-                    <th>2</th>
-                    <th>2</th>
+                    <th>Parsa Fallah</th>
+                    <th>Duncan Everson</th>
                 </tr>
                 <tr>
                     <th>3</th>
                     <th>0.05</th>
                     <th>20.89</th>
                     <th>09/29/2024 09:30:00</th>
-                    <th>3</th>
-                    <th>3</th>
+                    <th>Jade Carey</th>
+                    <th>Benny Beaver</th>
                 </tr>
             </table>
         </div>
@@ -79,7 +79,12 @@
             <form method="POST" id="updateSale">
                 <legend><strong>Add sale</strong></legend>
                 <fieldset class="fields">
-                    <input type="hidden" name="idSale" id="updateSale">
+                    <label> ID to update </label> <select name="ID">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                     <label> discount percent </label> <input type="text" name="discountPercent">
                     <label> payment </label> <input type="text" name="payment">
                     <label> date/time </label> <input type="datetime-local" name="date">
