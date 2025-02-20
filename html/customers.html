@@ -51,7 +51,7 @@
                     <label> first name </label> <input type="text" name="firstName">
                     <label> last name </label> <input type="text" name="lastName">
                     <label> email </label> <input type="text" name="email">
-                    <label> phone # </label> <input type="text" name="phone">
+                    <label> phone # </label> <input type="tel" name="phone">
                 </fieldset>
                     <input class="btn" type="submit" id="addEmployee" value="Add customer">
                     <input class="btn" type="button" value="cancel">
@@ -67,7 +67,7 @@
                     <label> first name </label> <input type="text" name="firstName">
                     <label> last name </label> <input type="text" name="lastName">
                     <label> email </label> <input type="text" name="email">
-                    <label> phone # </label> <input type="text" name="phone">
+                    <label> phone # </label> <input type="tel" name="phone">
                 </fieldset>
                     <input class="btn" type="submit" id="updateCustomer" value="Save update customer">
                     <input class="btn" type="button" value="cancel">
@@ -79,8 +79,12 @@
         <form method="POST" id="deleteCustomers">
             <legend><strong>Delete customer</strong></legend>
                 <fieldset class="fields">
-                <label> ID </label> <input type="text" name="customerID">
-                    
+                    <label> ID </label> <select name="ID">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>                    
             </fieldset>
             <input class="btn" type="submit" id="DeleteCustomers" value="Delete Customer">
                 <input class="btn" type="button" value="cancel">

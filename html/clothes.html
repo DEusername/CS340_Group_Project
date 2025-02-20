@@ -52,6 +52,26 @@
                     <th>1</th>
                     <th>3</th>
                 </tr>
+                <tr>
+                    <th>4</th>
+                    <th>Hat</th>
+                    <th>Accessories</th>
+                    <th>Large</th>
+                    <th>7.99</th>
+                    <th>7.99</th>
+                    <th>1</th>
+                    <th>1</th>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <th>Shorts</th>
+                    <th>Bottoms</th>
+                    <th>Medium</th>
+                    <th>10.99</th>
+                    <th>10.99</th>
+                    <th>1</th>
+                    <th>3</th>
+                </tr>
             </table>
         </div>
 
@@ -62,10 +82,19 @@
                 <fieldset class="fields">
                     <label> name </label> <input type="text" name="name">
                     <label> category </label> <input type="text" name="category">
-                    <label> size </label> <input type="text" name="size">
+                    <label> size </label> <select name="size">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Small</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Large</option>
+                    </select>
                     <label> price </label> <input type="text" name="price">
                     <label> purchace cost </label> <input type="text" name="purchaseCost">
-                    <label> stock </label> <input type="text" name="stock">
+                    <label> stock </label> <select name="in stock?">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                    </select>
                     <label> manufacturer </label> <select name="manufacturer">
                         <option value="0">&nbsp;</option>
                         <option value="1">Gucci</option>
@@ -86,16 +115,25 @@
                     <input type="hidden" name="idClothes" id="updateClothesID">
                     <label> name </label> <input type="text" name="name">
                     <label> category </label> <input type="text" name="category">
-                    <label> size </label> <input type="text" name="size">
+                    <label> size </label> <select name="size">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Small</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Large</option>
+                    </select>
                     <label> price </label> <input type="text" name="price">
                     <label> purchace cost </label> <input type="text" name="purchaseCost">
-                    <label> stock </label> <input type="text" name="stock">
+                    <label> stock </label> <select name="in stock?">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                    </select>
                     <label> manufacturer </label> <select name="manufacturer">
                         <option value="0">&nbsp;</option>
                         <option value="1">Gucci</option>
                         <option value="2">Versace</option>
                         <option value="3">Prada</option>
-                        </select>                
+                        </select>                      
                 </fieldset>
                     <input class="btn" type="submit" id="updateClothes" value="Update clothes">
                     <input class="btn" type="button" value="cancel">
@@ -107,8 +145,14 @@
         <form method="POST" id="deleteClothes">
             <legend><strong>Delete clothes</strong></legend>
                 <fieldset class="fields">
-                <label> ID </label> <input type="text" name="clothesID">
-                    
+                <label> ID </label> <select name="ID">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </fieldset>
             <input class="btn" type="submit" id="DeleteClothes" value="Delete Clothes">
                 <input class="btn" type="button" value="cancel">

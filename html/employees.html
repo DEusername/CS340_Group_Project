@@ -54,9 +54,9 @@
                 <fieldset class="fields">
                     <label> first name </label> <input type="text" name="firstName">
                     <label> last name </label> <input type="text" name="lastName">
-                    <label> hire date </label> <input type="text" name="hireDate">
+                    <label> hire date </label> <input type="date" name="hireDate">
                     <label> email </label> <input type="text" name="email">
-                    <label> phone # </label> <input type="text" name="phone">
+                    <label> phone # </label> <input type="tel" name="phone">
                 </fieldset>
                     <input class="btn" type="submit" id="addEmployee" value="Add employee">
                     <input class="btn" type="button" value="cancel">
@@ -71,9 +71,9 @@
                     <input type="hidden" name="idEmployee" id="updateEmployeeID">
                     <label> first name </label> <input type="text" name="firstName">
                     <label> last name </label> <input type="text" name="lastName">
-                    <label> hire date </label> <input type="text" name="hireDate">
+                    <label> hire date </label> <input type="date" name="hireDate">
                     <label> email </label> <input type="text" name="email">
-                    <label> phone # </label> <input type="text" name="phone">
+                    <label> phone # </label> <input type="tel" name="phone">
                 </fieldset>
                     <input class="btn" type="submit" id="updateEmployee" value="Save update employee">
                     <input class="btn" type="button" value="cancel">
@@ -85,8 +85,12 @@
         <form method="POST" id="deleteEmployee">
             <legend><strong>Delete employee</strong></legend>
                 <fieldset class="fields">
-                <label> ID </label> <input type="text" name="employeeID">
-                    
+                    <label> ID </label> <select name="ID">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>                    
             </fieldset>
             <input class="btn" type="submit" id="DeleteEmployee" value="Delete Employee">
                 <input class="btn" type="button" value="cancel">
