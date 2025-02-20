@@ -151,7 +151,9 @@ INSERT INTO Manufacturers (name, email, phone, address)
 VALUES 
 ('Gucci', 'gucci@gmail.com', '(541)555-1948', '91-487 Somewhere Pl.'),
 ('Versace', 'versace@gmail.com', '(541)555-9876', '435 Road St.'),
-('Prada', 'prada@gmail.com', '(541)555-8762', '9002 Boulevard Ave.');
+('Prada', 'prada@gmail.com', '(541)555-8762', '9002 Boulevard Ave.'),
+('Nike', 'nike@gmail.com', '(541)555-3827', '123 Place Rd.'),
+('Uniqlo', 'uniqlo@gmail.com', '(541)555-2911', '98-324 Sidewalk Ave.');
 
 -- --------------------------------------------------
 -- Insert sample data into Clothes table
@@ -183,6 +185,24 @@ VALUES
   21.99, 
   20.89, 
   1, 
+  (SELECT idManufacturer FROM Manufacturers WHERE name = 'Prada')
+),
+(
+  'Hat',
+  'Accessories',
+  'Large',
+  7.99,
+  7.99,
+  1,
+  (SELECT idManufacturer FROM Manufacturers WHERE name = 'Gucci')
+),
+(
+  'Shorts',
+  'Bottoms',
+  'Medium',
+  10.99,
+  10.99,
+  1,
   (SELECT idManufacturer FROM Manufacturers WHERE name = 'Prada')
 );
 
