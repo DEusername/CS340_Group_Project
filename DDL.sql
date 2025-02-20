@@ -46,13 +46,13 @@ CREATE TABLE Sales (
   payment DECIMAL(11, 2) NOT NULL,
   date DATETIME NOT NULL,
   Customers_idCustomer INT NOT NULL,
-  Employees_idEmployee INT NOT NULL,
+  Employees_idEmployee INT,
   FOREIGN KEY (Customers_idCustomer) 
     REFERENCES Customers(idCustomer)
     ON DELETE RESTRICT,
   FOREIGN KEY (Employees_idEmployee) 
     REFERENCES Employees(idEmployee)
-    ON DELETE RESTRICT
+    ON DELETE SET NULL
 );
 
 -- --------------------------------------------------
@@ -77,10 +77,10 @@ CREATE TABLE Clothes (
   price DECIMAL(11, 2) NOT NULL,
   purchaseCost DECIMAL(11, 2) NOT NULL,
   stock INT NOT NULL,
-  Manufacturers_idManufacturer INT,
+  Manufacturers_idManufacturer INT NOT NULL,
   FOREIGN KEY (Manufacturers_idManufacturer) 
     REFERENCES Manufacturers(idManufacturer) 
-    ON DELETE SET NULL
+    ON DELETE RESTRICT
 );
 
 -- --------------------------------------------------
@@ -88,13 +88,13 @@ CREATE TABLE Clothes (
 -- --------------------------------------------------
 CREATE TABLE SaleHasClothes (
   idSaleHasClothes INT AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
-  Sales_idSales INT NOT NULL,
+  Sales_idSale INT NOT NULL,
   Clothes_idClothes INT NOT NULL,
   quantity INT NOT NULL,
-  FOREIGN KEY (Sales_idSales) 
+  FOREIGN KEY (Sales_idSale) 
     REFERENCES Sales(idSale)
     ON DELETE CASCADE,
-  FOREIGN KEY (Clothes_idClothes) 
+  FOREIGN KEY (Clothes_idClothes)
     REFERENCES Clothes(idClothes)
     ON DELETE RESTRICT
 );
@@ -189,7 +189,7 @@ VALUES
 -- --------------------------------------------------
 -- Insert sample data into SaleHasClothes table
 -- --------------------------------------------------
-INSERT INTO SaleHasClothes (Sales_idSales, Clothes_idClothes, quantity)  
+INSERT INTO SaleHasClothes (Sales_idSale, Clothes_idClothes, quantity)  
 VALUES 
 (
   1,

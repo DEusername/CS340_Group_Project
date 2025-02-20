@@ -61,8 +61,14 @@ WHERE idCustomer = :givenIdFromForm;
 
 -- SELECTION 
 -- all Sales display
-SELECT *
-FROM Sales;
+SELECT Sales.discountPercent,
+  Sales.payment,
+  Sales.date,
+  CONCAT(Customers.firstName, ' ', Customers.lastName) AS 'Customer Name'
+  CONCAT(Employees.firstName, ' ', Employees.lastName) AS 'Employee Name'
+FROM Sales
+INNER JOIN Customers ON Sales.Customers_idCustomer = Customers_idCustomer
+INNER JOIN Employees ON Sales.Employees_idEmployee = Employees_idEmployee;
 
 -- populate drop down menu for making a SaleHasClothes entry
 SELECT Customers.firstName, Customers.lastName, Sales.date
@@ -148,8 +154,15 @@ WHERE idManufacturer = :givenIdFromForm;
 
 -- SELECTION 
 -- all Clothes display
-SELECT *
-FROM Clothes;
+SELECT Clothes.name,
+  Clothes.category,
+  Clothes.size,
+  Clothes.price,
+  Clothes.purchaseCost AS 'Acquisition Cost',
+  Clothes.stock,
+  Manufacturers.name AS 'Manufacturer'
+FROM Clothes
+INNER JOIN Manufacturers ON Clothes.Manufacturer_idManufacturer = Manufacturers.idManufacturer;
 
 -- populate drop down menu for making a SaleHasClothes entry
 SELECT Clothes.name, Clothes.size, Manufacturer.name
@@ -201,8 +214,8 @@ WHERE idClothes = :givenIdFromForm;;
 SELECT Customers.firstName, 
   Customers.lastName, 
   Sales.date, 
-  Clothes.name AS ClothesName, 
-  Manufacturers.name AS ManufacturerName, 
+  Clothes.name AS 'Clothes Name', 
+  Manufacturers.name AS 'Manufacturer', 
   SaleHasClothes.quantity
 FROM SaleHasClothes
 INNER JOIN Sales ON SaleHasClothes.Sales_idSale = Sales.idSale
