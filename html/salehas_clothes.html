@@ -13,27 +13,48 @@
             <p> </p>
             <table border="1" cellpadding="5">
                 <tr>
-                    <th>idSaleHasClothes</th>
-                    <th>Sales_idSales</th>
-                    <th>Clothes_idClothes</th>
-                    <th>quantity</th>
+                    <th>SaleHasClothesID</th>
+                    <th>Customer's First Name</th>
+                    <th>Customer's Last Name</th>
+                    <th>Datetime</th>
+                    <th>Clothes Name</th>
+                    <th>Manufacturer</th>
+                    <th>Quantity</th>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <th>1</th>
-                    <th>1</th>
+                    <th>Ben</th>
+                    <th>Gulbranson</th>
+                    <th>03/21/2018 14:30:00</th>
+                    <th>Shirt</th>
+                    <th>Gucci</th>
                     <th>1</th>
                 </tr>
                 <tr>
                     <th>2</th>
-                    <th>2</th>
-                    <th>2</th>
+                    <th>Ben</th>
+                    <th>Gulbranson</th>
+                    <th>03/21/2018 14:30:00</th>
+                    <th>Coat</th>
+                    <th>Versace</th>
                     <th>1</th>
                 </tr>
                 <tr>
                     <th>3</th>
-                    <th>3</th>
-                    <th>3</th>
+                    <th>Parsa</th>
+                    <th>Fallah</th>
+                    <th>07/05/2023 15:20:00</th>
+                    <th>Coat</th>
+                    <th>Versace</th>
+                    <th>1</th>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <th>Jade</th>
+                    <th>Carey</th>
+                    <th>09/29/2024 09:30:00</th>
+                    <th>Pants</th>
+                    <th>Prada</th>
                     <th>1</th>
                 </tr>
             </table>
@@ -44,19 +65,23 @@
             <form method="POST" id="addSaleHasClothes">
                 <legend><strong>Add sale with clothes</strong></legend>
                 <fieldset class="fields">
-                    <label> sale id </label> <select name="Sales_idSales">
+                    <label> Customer Name </label> <select name="customerName">
                         <option value="0">&nbsp;</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        </select>                    
-                    <label> clothes id </label> <select name="Clothes_idClothes">
+                        <option value="1">Ben Gulbranson</option>
+                        <option value="2">Parsa Fallah</option>
+                        <option value="3">Jade Carey</option>
+                        </select>
+                    <label> Datetime </label> <input type="datetime-local" name="datetime">
+                    <label> Clothes Name </label> <input type="text" name="clothesName">                   
+                    <label> Manufacturer </label> <select name="manufacturer">
                         <option value="0">&nbsp;</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="1">Gucci</option>
+                        <option value="2">Versace</option>
+                        <option value="3">Prada</option>
+                        <option value="4">Nike</option>
+                        <option value="5">Uniqlo</option>
                         </select>         
-                    <label> quantity </label> <input type="text" name="quantity">
+                    <label> Quantity </label> <input type="text" name="quantity">
                 </fieldset>
                     <input class="btn" type="submit" id="addSaleHasClothes" value="Add sale with clothes">
                     <input class="btn" type="button" value="cancel">
@@ -73,20 +98,25 @@
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>                   
-                    <label> sale id </label> <select name="Sales_idSales">
+                    <label> Customer Name </label> <select name="customerName">
                         <option value="0">&nbsp;</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        </select>                    
-                    <label> clothes id </label> <select name="Clothes_idClothes">
+                        <option value="1">Ben Gulbranson</option>
+                        <option value="2">Parsa Fallah</option>
+                        <option value="3">Jade Carey</option>
+                        </select>
+                    <label> Datetime </label> <input type="datetime-local" name="datetime">
+                    <label> Clothes Name </label> <input type="text" name="clothesName">                   
+                    <label> Manufacturer </label> <select name="manufacturer">
                         <option value="0">&nbsp;</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        </select>                      
-                    <label> quantity </label> <input type="text" name="quantity">
+                        <option value="1">Gucci</option>
+                        <option value="2">Versace</option>
+                        <option value="3">Prada</option>
+                        <option value="4">Nike</option>
+                        <option value="5">Uniqlo</option>
+                        </select>         
+                    <label> Quantity </label> <input type="text" name="quantity">
                 </fieldset>
                     <input class="btn" type="submit" id="updateSaleHasClothes" value="Update sale with clothes">
                     <input class="btn" type="button" value="cancel">
@@ -103,6 +133,7 @@
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>                    
             </fieldset>
             <input class="btn" type="submit" id="DeleteSaleHasClothes" value="Delete SaleHasClothes">

@@ -13,13 +13,13 @@
             <p> </p>
             <table border="1" cellpadding="5">
                 <tr>
-                    <th>idClothes</th>
-                    <th>name</th>
-                    <th>category</th>
-                    <th>size</th>
-                    <th>price</th>
-                    <th>purchaseCost</th>
-                    <th>stock</th>
+                    <th>ClothesID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Purchase Cost</th>
+                    <th>Stock</th>
                     <th>Manufacturer</th>
                 </tr>
                 <tr>
@@ -78,24 +78,24 @@
         <p>&nbsp;</p>
         <div id="insert">
             <form method="POST" id="addClothes">
-                <legend><strong>Add clothes</strong></legend>
+                <legend><strong>Add Clothes</strong></legend>
                 <fieldset class="fields">
-                    <label> name </label> <input type="text" name="name">
-                    <label> category </label> <input type="text" name="category">
-                    <label> size </label> <select name="size">
+                    <label> Name </label> <input type="text" name="name">
+                    <label> Category </label> <input type="text" name="category">
+                    <label> Size </label> <select name="size">
                         <option value="0">&nbsp;</option>
                         <option value="1">Small</option>
                         <option value="2">Medium</option>
                         <option value="3">Large</option>
                     </select>
-                    <label> price </label> <input type="text" name="price">
-                    <label> purchace cost </label> <input type="text" name="purchaseCost">
-                    <label> stock </label> <select name="in stock?">
+                    <label> Price </label> <input type="text" name="price">
+                    <label> Purchace Cost </label> <input type="text" name="purchaseCost">
+                    <label> Stock </label> <select name="in stock?">
                         <option value="0">&nbsp;</option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
-                    <label> manufacturer </label> <select name="manufacturer">
+                    <label> Manufacturer </label> <select name="manufacturer">
                         <option value="0">&nbsp;</option>
                         <option value="1">Gucci</option>
                         <option value="2">Versace</option>
@@ -110,9 +110,9 @@
         <p>&nbsp;</p>
         <div id="update">
             <form method="POST" id="updateClothes">
-                <legend><strong>Update clothes</strong></legend>
+                <legend><strong>Update Clothes</strong></legend>
                 <fieldset class="fields">   
-                    <label> ID to update </label> <select name="ID">
+                    <label> ID to Update </label> <select name="ID">
                         <option value="0">&nbsp;</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
