@@ -212,23 +212,43 @@ VALUES
 INSERT INTO SaleHasClothes (Sales_idSale, Clothes_idClothes, quantity)  
 VALUES 
 (
-  1,
-  1,
+  (SELECT Sales.idSale FROM Sales
+   INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+   WHERE Sales.date = '2018-03-21 14:30:00'
+   AND Customers.firstName = 'Ben' AND Customers.lastName = 'Gulbranson'),
+  (SELECT Clothes.idClothes FROM Clothes
+   INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+   WHERE Clothes.name = 'Shirt' AND Manufacturers.name = 'Gucci'),
   1
 ),
 (
-  1,
-  2,
+  (SELECT Sales.idSale FROM Sales
+   INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+   WHERE Sales.date = '2018-03-21 14:30:00'
+   AND Customers.firstName = 'Ben' AND Customers.lastName = 'Gulbranson'),
+  (SELECT Clothes.idClothes FROM Clothes
+   INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+   WHERE Clothes.name = 'Coat' AND Manufacturers.name = 'Versace'),
   1
 ),
 (
-  2,
-  2,
+  (SELECT Sales.idSale FROM Sales
+   INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+   WHERE Sales.date = '2023-07-05 15:20:00'
+   AND Customers.firstName = 'Parsa' AND Customers.lastName = 'Fallah'),
+  (SELECT Clothes.idClothes FROM Clothes
+   INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+   WHERE Clothes.name = 'Coat' AND Manufacturers.name = 'Versace'),
   1
-)
+),
 (
-  3,
-  3,
+  (SELECT Sales.idSale FROM Sales
+   INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+   WHERE Sales.date = '2024-09-29 09:30:00'
+   AND Customers.firstName = 'Jade' AND Customers.lastName = 'Carey'),
+  (SELECT Clothes.idClothes FROM Clothes
+   INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer
+   WHERE Clothes.name = 'Pants' AND Manufacturers.name = 'Prada'),
   1
 );
 
