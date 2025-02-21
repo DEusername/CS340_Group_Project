@@ -7,7 +7,12 @@
 
 -- SELECTION 
 -- all employee display
-SELECT *
+SELECT idEmployee,
+  firstName AS 'First Name',
+  lastName AS 'Last Name',
+  hireDate AS 'Hire Date',
+  email, 
+  phone
 FROM Employees;
 
 -- populate drop down menu for making a sale
@@ -34,7 +39,11 @@ WHERE idEmployee = :givenIdFromForm;
 
 -- SELECTION 
 -- all customer display
-SELECT *
+SELECT idCustomer,
+  firstName AS 'First Name',
+  lastName AS 'Last Name',
+  email,
+  phone
 FROM Customers;
 
 -- populate drop down menu for making a sale
@@ -61,11 +70,11 @@ WHERE idCustomer = :givenIdFromForm;
 
 -- SELECTION 
 -- all Sales display
-SELECT Sales.discountPercent,
+SELECT Sales.discountPercent AS 'Discount Percent',
   Sales.payment,
   Sales.date,
-  CONCAT(Customers.firstName, ' ', Customers.lastName) AS 'Customer Name'
-  CONCAT(Employees.firstName, ' ', Employees.lastName) AS 'Employee Name'
+  CONCAT(Customers.firstName, ' ', Customers.lastName) AS 'Customer'
+  CONCAT(Employees.firstName, ' ', Employees.lastName) AS 'Employee'
 FROM Sales
 INNER JOIN Customers ON Sales.Customers_idCustomer = Customers_idCustomer
 INNER JOIN Employees ON Sales.Employees_idEmployee = Employees_idEmployee;
@@ -158,7 +167,7 @@ SELECT Clothes.name,
   Clothes.category,
   Clothes.size,
   Clothes.price,
-  Clothes.purchaseCost AS 'Acquisition Cost',
+  Clothes.purchaseCost AS 'Purchase Cost',
   Clothes.stock,
   Manufacturers.name AS 'Manufacturer'
 FROM Clothes
@@ -211,9 +220,9 @@ WHERE idClothes = :givenIdFromForm;;
 -- --------------------------------------------------
 
 -- SELECTION 
-SELECT Customers.firstName, 
-  Customers.lastName, 
-  Sales.date, 
+SELECT Customers.firstName AS 'Customer"s First Name', 
+  Customers.lastName AS 'Customer"s Last Name', 
+  Sales.date AS 'Datetime', 
   Clothes.name AS 'Clothes Name', 
   Manufacturers.name AS 'Manufacturer', 
   SaleHasClothes.quantity
