@@ -1,11 +1,13 @@
-import express from "express";
 import path from "path";
+import { fileURLToPath } from "url";
+import express from "express";
+
+// Get the filename and directory name
+const __filename = fileURLToPath(import.meta.url);
+const DIRNAME = path.dirname(__filename);
 
 // Create an express app
 const app = express();
-
-// Get the directory name of the current module
-const DIRNAME = import.meta.dirname;
 
 // view engine setup
 app.set("views", path.join(DIRNAME, "views"));
