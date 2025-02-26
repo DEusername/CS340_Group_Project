@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Index Page</title>
-    </head>
-    <body>
-        <h1>Index</h1>
 
-        [ <a href="employees.html">Employees</a> | <a href="customers.html">Customers</a> | <a href="sales.html">Sales</a> | <a href="salehas_clothes.html">Sale Has Clothes</a> | <a href="clothes.html">Clothes</a> | <a href="manufacturers.html">Manufacturers</a> | <a href="index.html">Index</a> ]
-    </body>
+<head>
+  <meta charset="utf-8">
+  <title>Index Page</title>
+</head>
+
+<body>
+  <h1>Index</h1>
+
+  [ <a href="employees.html">Employees</a> | <a href="customers.html">Customers</a> | <a href="sales.html">Sales</a> |
+  <a href="salehas_clothes.html">Sale Has Clothes</a> | <a href="clothes.html">Clothes</a> | <a
+    href="manufacturers.html">Manufacturers</a> | <a href="index.html">Index</a> ]
+</body>
+
+<% for(i=0; i < 10; i++) { %>
+  <%console.log(i)%>
+    <%}%>
+
+      <p>
+        <%= true ? "true" : "false" %>
+      </p>
+
 </html>
