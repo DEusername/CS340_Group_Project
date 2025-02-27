@@ -19,16 +19,37 @@ app.use(express.static(path.join(DIRNAME, "public")));
 
 // initial index page loading
 app.get("/", async (req, res) => {
-  // res.sendFile("/index.html");
-
   res.render("index.ejs", { info: [] })
 });
 
-// initial index page loading
-app.get("/manufacturers", async (req, res) => {
-  // res.sendFile("/index.html");
+// customer page
+app.get("/customers", async (req, res) => {
+  res.render("customers.ejs", { info: [] })
+});
 
+// employees page
+app.get("/employees", async (req, res) => {
+  res.render("employees.ejs", { info: [] })
+});
+
+// sale page
+app.get("/sales", async (req, res) => {
+  res.render("sales.ejs", { info: [] })
+});
+
+// clothes page
+app.get("/clothes", async (req, res) => {
+  res.render("clothes.ejs", { info: [] })
+});
+
+// manufacturer page
+app.get("/manufacturers", async (req, res) => {
   res.render("manufacturers.ejs", { info: [] })
+});
+
+// salehas_clothes page
+app.get("/salehas_clothes", async (req, res) => {
+  res.render("salehas_clothes.ejs", { info: [] })
 });
 
 // catch any other route and send 404
