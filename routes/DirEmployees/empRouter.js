@@ -1,7 +1,7 @@
 import express from 'express';
 
 import db from '../db-connector.js'
-import queries from './sql-queries.js';
+import queries from './emp-queries.js';
 
 const empRouter = express.Router();
 
@@ -13,8 +13,18 @@ empRouter.get('/', async (req, res) => {
   console.log(fields);
   console.log(results);
 
+  // convert date format of each record in results
+  results.forEach(record => {
+    // convert the yyyy-mm-dd... format to be in mm/dd/yyyy format
+    record['Hire Date'] = record['Hire Date'].toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric'
+    })
+  });
+
   // serve the employees webpage back to the user
-  res.render('employees', { info: [] })
+  res.render('employees', { records: results })
 });
 
 // create employee entry
