@@ -12,7 +12,7 @@
 
 import mysql from 'mysql2/promise';
 
-const pool = await mysql.createPool({
+const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'classmysql.engr.oregonstate.edu',
   user: 'cs340_<onid>',
