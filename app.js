@@ -2,7 +2,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 
-import empRouter from './routes/DirEmployees/employees.js';
+import empRouter from './routes/DirEmployees/empRouter.js';
 
 // Get the filename and directory name
 const __filename = fileURLToPath(import.meta.url);
