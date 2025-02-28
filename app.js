@@ -69,7 +69,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-const PORT = 3000;
+const PORT = 7642;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
