@@ -10,9 +10,6 @@ empRouter.get('/', async (req, res) => {
   // read most current data from the db
   let [results, fields] = await db.query(queries.read);
 
-  console.log(fields);
-  console.log(results);
-
   // convert date format of each record in results
   results.forEach(record => {
     // convert the yyyy-mm-dd... format to be in mm/dd/yyyy format
@@ -33,12 +30,12 @@ empRouter.post('/create', async (req, res) => {
 });
 
 // update employee entry data
-empRouter.put('/update', async (req, res) => {
+empRouter.post('/update', async (req, res) => {
   res.redirect('/employees');
 });
 
 // delete employee entry.
-empRouter.delete('/delete', async (req, res) => {
+empRouter.post('/delete', async (req, res) => {
   res.redirect('/employees');
 });
 
