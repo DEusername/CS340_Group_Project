@@ -38,8 +38,8 @@
   </div>
 
   <p>&nbsp;</p>
-  <div id="insert">
-    <form method="POST" id="addEmployee">
+  <div id="create">
+    <form method="POST" action="/employees/create" id="addEmployee">
       <legend><strong>Add employee</strong></legend>
       <fieldset class="fields">
         <label> first name </label> <input type="text" name="firstName">
@@ -55,7 +55,7 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateEmployee">
+    <form method="POST" action="/employees/update" id="updateEmployee">
       <legend><strong>Update employee</strong></legend>
       <fieldset class="fields">
         <label> ID to update </label>
