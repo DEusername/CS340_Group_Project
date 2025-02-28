@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Clothes Page</title>
+</head>
+
+<body>
+  <h1>Clothes</h1>
+
+  [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
+  <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a
+    href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
+
+  <div id="browse">
+    <p> </p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>ClothesID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Size</th>
+        <th>Price</th>
+        <th>Purchase Cost</th>
+        <th>Stock</th>
+        <th>Manufacturer</th>
+      </tr>
+      <tr>
+        <th>1</th>
+        <th>Shirt</th>
+        <th>Tops</th>
+        <th>Medium</th>
+        <th>10.99</th>
+        <th>9.89</th>
+        <th>y</th>
+        <th>Gucci</th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Coat</th>
+        <th>Outerwear</th>
+        <th>Large</th>
+        <th>54.50</th>
+        <th>40.88</th>
+        <th>y</th>
+        <th>Versace</th>
+      </tr>
+      <tr>
+        <th>3</th>
+        <th>Pants</th>
+        <th>Bottoms</th>
+        <th>Small</th>
+        <th>21.99</th>
+        <th>20.89</th>
+        <th>y</th>
+        <th>Prada</th>
+      </tr>
+      <tr>
+        <th>4</th>
+        <th>Hat</th>
+        <th>Accessories</th>
+        <th>Large</th>
+        <th>7.99</th>
+        <th>7.99</th>
+        <th>y</th>
+        <th>Gucci</th>
+      </tr>
+      <tr>
+        <th>5</th>
+        <th>Shorts</th>
+        <th>Bottoms</th>
+        <th>Medium</th>
+        <th>10.99</th>
+        <th>10.99</th>
+        <th>y</th>
+        <th>Prada</th>
+      </tr>
+    </table>
+  </div>
+
+  <p>&nbsp;</p>
+  <div id="insert">
+    <form method="POST" id="addClothes">
+      <legend><strong>Add Clothes</strong></legend>
+      <fieldset class="fields">
+        <label> Name </label> <input type="text" name="name">
+        <label> Category </label> <input type="text" name="category">
+        <label> Size </label> <select name="size">
+          <option value="0">&nbsp;</option>
+          <option value="1">Small</option>
+          <option value="2">Medium</option>
+          <option value="3">Large</option>
+        </select>
+        <label> Price </label> <input type="text" name="price">
+        <label> Purchace Cost </label> <input type="text" name="purchaseCost">
+        <label> Stock </label> <select name="in stock?">
+          <option value="0">&nbsp;</option>
+          <option value="1">Yes</option>
+          <option value="2">No</option>
+        </select>
+        <label> Manufacturer </label> <select name="manufacturer">
+          <option value="0">&nbsp;</option>
+          <option value="1">Gucci</option>
+          <option value="2">Versace</option>
+          <option value="3">Prada</option>
+        </select>
+      </fieldset>
+      <input class="btn" type="submit" id="addClothes" value="Add clothes">
+      <input class="btn" type="button" value="cancel">
+    </form>
+  </div>
+
+  <p>&nbsp;</p>
+  <div id="update">
+    <form method="POST" id="updateClothes">
+      <legend><strong>Update Clothes</strong></legend>
+      <fieldset class="fields">
+        <label> ID to Update </label> <select name="ID">
+          <option value="0">&nbsp;</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <label> name </label> <input type="text" name="name">
+        <label> category </label> <input type="text" name="category">
+        <label> size </label> <select name="size">
+          <option value="0">&nbsp;</option>
+          <option value="1">Small</option>
+          <option value="2">Medium</option>
+          <option value="3">Large</option>
+        </select>
+        <label> price </label> <input type="text" name="price">
+        <label> purchace cost </label> <input type="text" name="purchaseCost">
+        <label> stock </label> <select name="in stock?">
+          <option value="0">&nbsp;</option>
+          <option value="1">Yes</option>
+          <option value="2">No</option>
+        </select>
+        <label> manufacturer </label> <select name="manufacturer">
+          <option value="0">&nbsp;</option>
+          <option value="1">Gucci</option>
+          <option value="2">Versace</option>
+          <option value="3">Prada</option>
+        </select>
+      </fieldset>
+      <input class="btn" type="submit" id="updateClothes" value="Update clothes">
+      <input class="btn" type="button" value="cancel">
+    </form>
+  </div>
+
+  <p>&nbsp;</p>
+  <div id="delete" style="display: block">
+    <form method="POST" id="deleteClothes">
+      <legend><strong>Delete clothes</strong></legend>
+      <fieldset class="fields">
+        <label> ID </label> <select name="ID">
+          <option value="0">&nbsp;</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </fieldset>
+      <input class="btn" type="submit" id="DeleteClothes" value="Delete Clothes">
+      <input class="btn" type="button" value="cancel">
+    </form>
+  </div>
+
+</body>
+
+</html>

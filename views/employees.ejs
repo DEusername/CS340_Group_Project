@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Manufacturers Page</title>
+  <title>Employees Page</title>
 </head>
 
 <body>
-  <h1>Manufacturers</h1>
+  <h1>Employees</h1>
 
   [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
   <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a
@@ -17,105 +17,95 @@
     <p> </p>
     <table border="1" cellpadding="5">
       <tr>
-        <th>ManufacturerID</th>
-        <th>name</th>
+        <th>EmployeeID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Hire Date</th>
         <th>email</th>
         <th>phone</th>
-        <th>address</th>
       </tr>
       <tr>
         <th>1</th>
-        <th>Gucci</th>
-        <th>gucci@gmail.com</th>
-        <th>(541)555-1948</th>
-        <th>91-487 Somewhere Pl.</th>
+        <th>Alexander</th>
+        <th>Addis</th>
+        <th>12/23/2017</th>
+        <th>aaddis@gmail.com</th>
+        <th>(541)555-3850</th>
       </tr>
       <tr>
         <th>2</th>
-        <th>Versace</th>
-        <th>versace@gmail.com</th>
-        <th>(541)555-9876</th>
-        <th>435 Road St.</th>
+        <th>Duncan</th>
+        <th>Everson</th>
+        <th>05/03/2016</th>
+        <th>duncane@gmail.com</th>
+        <th>(541)555-0931</th>
       </tr>
       <tr>
         <th>3</th>
-        <th>Prada</th>
-        <th>prada@gmail.com</th>
-        <th>(541)555-8762</th>
-        <th>9002 Boulevard Ave.</th>
-      </tr>
-      <tr>
-        <th>4</th>
-        <th>Nike</th>
-        <th>nike@gmail.com</th>
-        <th>(541)555-3827</th>
-        <th>123 Place Rd.</th>
-      </tr>
-      <tr>
-        <th>5</th>
-        <th>Uniqlo</th>
-        <th>uniqlo@gmail.com</th>
-        <th>(541)555-2911</th>
-        <th>98-324 Sidewalk Ave.</th>
+        <th>Benny</th>
+        <th>Beaver</th>
+        <th>10/30/2019</th>
+        <th>bbeav@gmail.com</th>
+        <th>(541)555-9874</th>
       </tr>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addManufacturer">
-      <legend><strong>Add manufacturer</strong></legend>
+    <form method="POST" id="addEmployee">
+      <legend><strong>Add employee</strong></legend>
       <fieldset class="fields">
-        <label> name </label> <input type="text" name="name">
+        <label> first name </label> <input type="text" name="firstName">
+        <label> last name </label> <input type="text" name="lastName">
+        <label> hire date </label> <input type="date" name="hireDate">
         <label> email </label> <input type="text" name="email">
         <label> phone # </label> <input type="tel" name="phone">
-        <label> address </label> <input type="text" name="address">
       </fieldset>
-      <input class="btn" type="submit" id="addManufacturer" value="Add manufacturer">
+      <input class="btn" type="submit" id="addEmployee" value="Add employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateManufacturer">
-      <legend><strong>Update manufacturer</strong></legend>
+    <form method="POST" id="updateEmployee">
+      <legend><strong>Update employee</strong></legend>
       <fieldset class="fields">
         <label> ID to update </label> <select name="ID">
           <option value="0">&nbsp;</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select> <label> name </label> <input type="text" name="name">
+        </select>
+        <label> first name </label> <input type="text" name="firstName">
+        <label> last name </label> <input type="text" name="lastName">
+        <label> hire date </label> <input type="date" name="hireDate">
         <label> email </label> <input type="text" name="email">
         <label> phone # </label> <input type="tel" name="phone">
-        <label> address </label> <input type="text" name="address">
       </fieldset>
-      <input class="btn" type="submit" id="updateManufacturer" value="Update manufacturer">
+      <input class="btn" type="submit" id="updateEmployee" value="Save update employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
 
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteManufacturer">
-      <legend><strong>Delete manufacturer</strong></legend>
+    <form method="POST" id="deleteEmployee">
+      <legend><strong>Delete employee</strong></legend>
       <fieldset class="fields">
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
         </select>
       </fieldset>
-      <input class="btn" type="submit" id="DeleteManufacturer" value="Delete Manufacturer">
+      <input class="btn" type="submit" id="DeleteEmployee" value="Delete Employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
+
 </body>
 
 </html>
