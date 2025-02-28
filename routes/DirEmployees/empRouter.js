@@ -10,6 +10,9 @@ empRouter.get('/', async (req, res) => {
   // read most current data from the db
   let [results, fields] = await db.query(queries.read);
 
+  console.log(results)
+  console.log(fields)
+
   // convert date format of each record in results
   results.forEach(record => {
     // convert the yyyy-mm-dd... format to be in mm/dd/yyyy format
@@ -26,6 +29,8 @@ empRouter.get('/', async (req, res) => {
 
 // create employee entry
 empRouter.post('/create', async (req, res) => {
+
+
   res.redirect('/employees');
 });
 

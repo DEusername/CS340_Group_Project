@@ -60,9 +60,9 @@
       <fieldset class="fields">
         <label> ID to update </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idEmployee%>"><%=record.idEmployee%></option>
+          <%});%>
         </select>
         <label> first name </label> <input type="text" name="firstName">
         <label> last name </label> <input type="text" name="lastName">
@@ -80,11 +80,12 @@
     <form method="POST" id="deleteEmployee">
       <legend><strong>Delete employee</strong></legend>
       <fieldset class="fields">
-        <label> ID </label> <select name="ID">
+        <label> ID </label>
+        <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idEmployee%>"><%=record.idEmployee%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="deleteEmployeeButton" value="Delete Employee">
