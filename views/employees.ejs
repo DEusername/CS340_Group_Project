@@ -58,22 +58,71 @@
     <form method="POST" id="updateEmployee">
       <legend><strong>Update employee</strong></legend>
       <fieldset class="fields">
-        <label> ID to update </label> <select name="ID">
-          <option value="0">&nbsp;</option>
-          <%records.forEach(record=> {%>
-          <option value="<%=record.idEmployee%>"><%=record.idEmployee%></option>
-          <%});%>
+        <label> ID to update </label>
+        <select name="ID" id="employeeSelect">
+          <option value="0"> </option>
+          <% records.forEach(record => { %>
+          <option value="<%= record.idEmployee %>"><%= record.idEmployee %></option>
+          <% }); %>
         </select>
-        <label> first name </label> <input type="text" name="firstName">
-        <label> last name </label> <input type="text" name="lastName">
-        <label> hire date </label> <input type="date" name="hireDate">
-        <label> email </label> <input type="text" name="email">
-        <label> phone # </label> <input type="tel" name="phone">
+        <label> first name </label>
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
+        <label> last name </label>
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
+        <label> hire date </label>
+        <input type="date" name="hireDate" id="hireDate">
+        <label> email </label>
+        <input type="text" name="email" id="email" placeholder="Enter email">
+        <label> phone # </label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter phone number">
       </fieldset>
       <input class="btn" type="submit" id="updateEmployeeButton" value="Save update employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
+
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
+
+    // Function to format date for <input type="date"> (YYYY-MM-DD)
+    function formatDateForInput(date) {
+      const d = new Date(date);
+      return d.toISOString().split('T')[0]; // Returns "YYYY-MM-DD"
+    }
+
+    // Event listener for dropdown change
+    document.getElementById('employeeSelect').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        firstName: document.getElementById('firstName'),
+        lastName: document.getElementById('lastName'),
+        hireDate: document.getElementById('hireDate'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone')
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.firstName.value = '';
+        inputs.lastName.value = '';
+        inputs.hireDate.value = '';
+        inputs.email.value = '';
+        inputs.phone.value = '';
+        return;
+      }
+
+      // Find the selected record
+      const record = records.find(r => r.idEmployee == selectedId);
+      if (record) {
+        inputs.firstName.value = record['First Name'] || '';
+        inputs.lastName.value = record['Last Name'] || '';
+        inputs.hireDate.value = formatDateForInput(record['Hire Date']) || '';
+        inputs.email.value = record.email || '';
+        inputs.phone.value = record.phone || '';
+      }
+    });
+  </script>
 
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
