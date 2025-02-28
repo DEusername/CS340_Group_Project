@@ -51,23 +51,17 @@ app.get("/salehas_clothes", async (req, res) => {
   res.render("salehas_clothes.ejs", { info: [] })
 });
 
-// catch any other route and send 404
-app.use(function (req, res, next) {
-  res.status = 404;
-  let fileName = DIRNAME + "/public/404.html"
-  res.sendFile(fileName);
-});
-
+// being buggy right now, so commented it out.
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render("error");
+// });
 
 const PORT = 7642;
 app.listen(PORT, () => {
