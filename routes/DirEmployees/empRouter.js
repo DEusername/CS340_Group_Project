@@ -29,11 +29,19 @@ empRouter.get('/', async (req, res) => {
 
 // create employee entry
 empRouter.post('/create', async (req, res) => {
+  let [results, fields] = await db.query(queries.create, [req.body.firstName, req.body.lastName, req.body.hireDate, req.body.email, req.body.phone]);
+  if (results.affectedRows != 1)
+    console.log("create failed");
+
   res.redirect('/employees');
 });
 
 // update employee entry data
 empRouter.post('/update', async (req, res) => {
+  let [results, fields] = await db.query(queries.update, [req.body.firstName, req.body.lastName, req.body.hireDate, req.body.email, req.body.phone, req.body.ID]);
+  if (results.affectedRows != 1)
+    console.log("update failed")
+
   res.redirect('/employees');
 });
 
