@@ -10,8 +10,8 @@ empRouter.get('/', async (req, res) => {
   // read most current data from the db
   let [results, fields] = await db.query(queries.read);
 
-  console.log(results)
-  console.log(fields)
+  // console.log(results)
+  // console.log(fields)
 
   // convert date format of each record in results
   results.forEach(record => {
@@ -29,8 +29,6 @@ empRouter.get('/', async (req, res) => {
 
 // create employee entry
 empRouter.post('/create', async (req, res) => {
-
-
   res.redirect('/employees');
 });
 
@@ -41,6 +39,12 @@ empRouter.post('/update', async (req, res) => {
 
 // delete employee entry.
 empRouter.post('/delete', async (req, res) => {
+
+  // read most current data from the db
+  let [results, fields] = await db.query(queries.delete, [req.body.ID]);
+  if (results.affectedRows != 1)
+    console.log("delete failed");
+
   res.redirect('/employees');
 });
 
