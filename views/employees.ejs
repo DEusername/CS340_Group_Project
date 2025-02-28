@@ -10,8 +10,7 @@
   <h1>Employees</h1>
 
   [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
-  <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a
-    href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
+  <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
 
   <div id="browse">
     <p> </p>
@@ -24,30 +23,17 @@
         <th>email</th>
         <th>phone</th>
       </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
       <tr>
-        <th>1</th>
-        <th>Alexander</th>
-        <th>Addis</th>
-        <th>12/23/2017</th>
-        <th>aaddis@gmail.com</th>
-        <th>(541)555-3850</th>
+        <td><%=record['idEmployee']%></td>
+        <td><%=record['First Name']%></td>
+        <td><%=record['Last Name']%></td>
+        <td><%=record['Hire Date']%></td>
+        <td><%=record['email']%></td>
+        <td><%=record['phone']%></td>
       </tr>
-      <tr>
-        <th>2</th>
-        <th>Duncan</th>
-        <th>Everson</th>
-        <th>05/03/2016</th>
-        <th>duncane@gmail.com</th>
-        <th>(541)555-0931</th>
-      </tr>
-      <tr>
-        <th>3</th>
-        <th>Benny</th>
-        <th>Beaver</th>
-        <th>10/30/2019</th>
-        <th>bbeav@gmail.com</th>
-        <th>(541)555-9874</th>
-      </tr>
+      <%});%>
     </table>
   </div>
 
@@ -62,7 +48,7 @@
         <label> email </label> <input type="text" name="email">
         <label> phone # </label> <input type="tel" name="phone">
       </fieldset>
-      <input class="btn" type="submit" id="addEmployee" value="Add employee">
+      <input class="btn" type="submit" id="addEmployeeButton" value="Add employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
@@ -74,9 +60,9 @@
       <fieldset class="fields">
         <label> ID to update </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idEmployee%>"><%=record.idEmployee%></option>
+          <%});%>
         </select>
         <label> first name </label> <input type="text" name="firstName">
         <label> last name </label> <input type="text" name="lastName">
@@ -84,7 +70,7 @@
         <label> email </label> <input type="text" name="email">
         <label> phone # </label> <input type="tel" name="phone">
       </fieldset>
-      <input class="btn" type="submit" id="updateEmployee" value="Save update employee">
+      <input class="btn" type="submit" id="updateEmployeeButton" value="Save update employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
@@ -94,14 +80,15 @@
     <form method="POST" id="deleteEmployee">
       <legend><strong>Delete employee</strong></legend>
       <fieldset class="fields">
-        <label> ID </label> <select name="ID">
+        <label> ID </label>
+        <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idEmployee%>"><%=record.idEmployee%></option>
+          <%});%>
         </select>
       </fieldset>
-      <input class="btn" type="submit" id="DeleteEmployee" value="Delete Employee">
+      <input class="btn" type="submit" id="deleteEmployeeButton" value="Delete Employee">
       <input class="btn" type="button" value="cancel">
     </form>
   </div>
