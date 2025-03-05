@@ -42,10 +42,10 @@
     <form method="POST" action="/employees/create" id="addEmployee">
       <legend><strong>Add employee</strong></legend>
       <fieldset class="fields">
-        <label> first name </label> <input type="text" name="firstName">
-        <label> last name </label> <input type="text" name="lastName">
-        <label> hire date </label> <input type="date" name="hireDate">
-        <label> email </label> <input type="text" name="email">
+        <label> first name </label> <input type="text" name="firstName" required>
+        <label> last name </label> <input type="text" name="lastName" required>
+        <label> hire date </label> <input type="date" class="hire-date" name="hireDate" max="" required>
+        <label> email </label> <input type="text" name="email" required>
         <label> phone # </label> <input type="tel" name="phone">
       </fieldset>
       <input class="btn" type="submit" id="addEmployeeButton" value="Add employee">
@@ -65,19 +65,28 @@
           <% }); %>
         </select>
         <label> first name </label>
-        <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name" required>
         <label> last name </label>
-        <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name" required>
         <label> hire date </label>
-        <input type="date" name="hireDate" id="hireDate">
+        <input type="date" name="hireDate" class="hire-date" id="hireDate" max="" required>
         <label> email </label>
-        <input type="text" name="email" id="email" placeholder="Enter email">
+        <input type="text" name="email" id="email" placeholder="Enter email" required>
         <label> phone # </label>
         <input type="tel" name="phone" id="phone" placeholder="Enter phone number">
       </fieldset>
       <input class="btn" type="submit" id="updateEmployeeButton" value="Save update employee">
     </form>
   </div>
+
+  <!-- Create maximum date values equal to the current day for every date entry-->
+  <script>
+    const today = new Date().toISOString().split("T")[0];
+    let hireDates = document.getElementsByClassName("hire-date");
+    for (let element of hireDates) {
+      element.setAttribute("max", today);
+    }
+  </script>
 
   <!-- Make the update form auto-populate with record info based on the id -->
   <script>
