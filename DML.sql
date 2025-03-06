@@ -213,7 +213,7 @@ WHERE idClothes = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Clothes
-WHERE idClothes = :givenIdFromForm;;
+WHERE idClothes = :givenIdFromForm;
 
 -- --------------------------------------------------
 -- SaleHasClothes Queries

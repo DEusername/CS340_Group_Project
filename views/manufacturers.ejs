@@ -22,47 +22,22 @@
         <th>phone</th>
         <th>address</th>
       </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
       <tr>
-        <td>1</td>
-        <td>Gucci</td>
-        <td>gucci@gmail.com</td>
-        <td>(541)555-1948</td>
-        <td>91-487 Somewhere Pl.</td>
+        <td><%=record['idManufacturer']%></td>
+        <td><%=record['Name']%></td>
+        <td><%=record['Email']%></td>
+        <td><%=record['Phone']%></td>
+        <td><%=record['Address']%></td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Versace</td>
-        <td>versace@gmail.com</td>
-        <td>(541)555-9876</td>
-        <td>435 Road St.</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Prada</td>
-        <td>prada@gmail.com</td>
-        <td>(541)555-8762</td>
-        <td>9002 Boulevard Ave.</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Nike</td>
-        <td>nike@gmail.com</td>
-        <td>(541)555-3827</td>
-        <td>123 Place Rd.</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Uniqlo</td>
-        <td>uniqlo@gmail.com</td>
-        <td>(541)555-2911</td>
-        <td>98-324 Sidewalk Ave.</td>
-      </tr>
+      <%});%>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addManufacturer">
+    <form method="POST" action="/manufacturers/create" id="addManufacturer">
       <legend><strong>Add manufacturer</strong></legend>
       <fieldset class="fields">
         <label> name </label> <input type="text" name="name">
@@ -76,17 +51,17 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateManufacturer">
+    <form method="POST" action="/employees/update" id="updateManufacturer">
       <legend><strong>Update manufacturer</strong></legend>
       <fieldset class="fields">
-        <label> ID to update </label> <select name="ID">
-          <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select> <label> name </label> <input type="text" name="name">
+        <label> ID to update </label> 
+        <select name="ID" id="manufacturerSelect">
+          <option value="0"> </option>
+          <% records.forEach(record => { %>
+            <option value="<%= record.idManufacturer %>"><%= record.idManufacturer %></option>
+            <% }); %>
+        </select> 
+        <label> name </label> <input type="text" name="name">
         <label> email </label> <input type="text" name="email">
         <label> phone # </label> <input type="tel" name="phone">
         <label> address </label> <input type="text" name="address">
@@ -95,18 +70,50 @@
     </form>
   </div>
 
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
+
+    // Event listener for dropdown change
+    document.getElementById('manufacturerSelect').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone'),
+        address: document.getElementById('address'),
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.name.value = '';
+        inputs.email.value = '';
+        inputs.phone.value = '';
+        inputs.address.value = '';
+        return;
+      }
+
+      // Find the selected record
+      const record = records.find(r => r.idManufacturer == selectedId);
+      if (record) {
+        inputs.name.value = record['Name'] || '';
+        inputs.email.value = record['Email'] || '';
+        inputs.phone.value = record['Phone'] || '';
+        inputs.address.value = record['Address'] || '';
+      }
+    });
+  </script>
+
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteManufacturer">
+    <form method="POST" action="/manufacturers/delete" id="deleteManufacturer">
       <legend><strong>Delete manufacturer</strong></legend>
       <fieldset class="fields">
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <%records.forEach(record=> {%>
+            <option value="<%=record.idManufacturer%>"><%=record.idManufacturer%></option>
+            <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteManufacturer" value="Delete Manufacturer">

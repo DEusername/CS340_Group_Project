@@ -25,62 +25,25 @@
         <th>Stock</th>
         <th>Manufacturer</th>
       </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
       <tr>
-        <td>1</td>
-        <td>Shirt</td>
-        <td>Tops</td>
-        <td>Medium</td>
-        <td>10.99</td>
-        <td>9.89</td>
-        <td>y</td>
-        <td>Gucci</td>
+        <td><%=record['idClothes']%></td>
+        <td><%=record['Name']%></td>
+        <td><%=record['Category']%></td>
+        <td><%=record['Size']%></td>
+        <td><%=record['Price']%></td>
+        <td><%=record['Purchase Cost']%></td>
+        <td><%=record['Stock']%></td>
+        <td><%=record['Manufacturer']%></td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Coat</td>
-        <td>Outerwear</td>
-        <td>Large</td>
-        <td>54.50</td>
-        <td>40.88</td>
-        <td>y</td>
-        <td>Versace</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Pants</td>
-        <td>Bottoms</td>
-        <td>Small</td>
-        <td>21.99</td>
-        <td>20.89</td>
-        <td>y</td>
-        <td>Prada</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Hat</td>
-        <td>Accessories</td>
-        <td>Large</td>
-        <td>7.99</td>
-        <td>7.99</td>
-        <td>y</td>
-        <td>Gucci</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Shorts</td>
-        <td>Bottoms</td>
-        <td>Medium</td>
-        <td>10.99</td>
-        <td>10.99</td>
-        <td>y</td>
-        <td>Prada</td>
-      </tr>
+      <%});%>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addClothes">
+    <form method="POST" action="/clothes/create" id="addClothes">
       <legend><strong>Add Clothes</strong></legend>
       <fieldset class="fields">
         <label> Name </label> <input type="text" name="name">
@@ -111,16 +74,15 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateClothes">
+    <form method="POST" action="/clothes/update" id="updateClothes">
       <legend><strong>Update Clothes</strong></legend>
       <fieldset class="fields">
-        <label> ID to Update </label> <select name="ID">
-          <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+        <label> ID to Update </label> 
+          <select name="ID" id="clothesSelect">
+          <option value="0"> </option>
+            <% records.forEach(record => { %>
+            <option value="<%= record.idClothes %>"><%= record.idClothes %></option>
+            <% }); %>
         </select>
         <label> name </label> <input type="text" name="name">
         <label> category </label> <input type="text" name="category">
@@ -148,18 +110,58 @@
     </form>
   </div>
 
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
+  
+  // Event listener for dropdown change
+  document.getElementById('clothesSelect').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        name: document.getElementById('name'),
+        category: document.getElementById('category'),
+        size: document.getElementById('size'),
+        price: document.getElementById('price'),
+        purchaseCost: document.getElementById('purchaseCost'),
+        stock: document.getElementById('stock'),
+        Manufacturers_idManufacturer: document.getElementById('Manufacturers_idManufacturer')
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.name.value = '';
+        inputs.category.value = '';
+        inputs.size.value = '';
+        inputs.price.value = '';
+        inputs.purchaseCost.value = '';
+        inputs.stock.value = '';
+        inputs.Manufacturers_idManufacturer.value = '';
+        return;
+
+        // Find the selected record
+      const record = records.find(r => r.idClothes == selectedId);
+      if (record) {
+        inputs.name.value = record['Name'] || '';
+        inputs.category.value = record['Category'] || '';
+        inputs.size.value = record['Size'] || '';
+        inputs.price.value = record['Price'] || '';
+        inputs.purchaseCost.value = record['Purchase Cost'] || '';
+        inputs.stock.value = record['Stock'] || '';
+        inputs.Manufacturers_idManufacturer.value = record['Manufacturer'] || '';
+      }
+    });
+  </script>
+
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteClothes">
+    <form method="POST" action="/clothes/delete" id="deleteClothes">
       <legend><strong>Delete clothes</strong></legend>
       <fieldset class="fields">
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idClothes%>"><%=record.idClothes%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteClothes" value="Delete Clothes">
