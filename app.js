@@ -4,6 +4,8 @@ import express from "express";
 
 import custRouter from './routes/DirCustomers/custRouter.js';
 import empRouter from './routes/DirEmployees/empRouter.js';
+import cloRouter from './routes/DirClothes/cloRouter.js';
+import manRouter from './routes/DirManufacturers/manRouter.js';
 
 // Get the filename and directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -34,15 +36,9 @@ app.get("/sales", async (req, res) => {
   res.render("sales.ejs", { info: [] })
 });
 
-// clothes page
-app.get("/clothes", async (req, res) => {
-  res.render("clothes.ejs", { info: [] })
-});
+app.use('/clothes', cloRouter);
 
-// manufacturer page
-app.get("/manufacturers", async (req, res) => {
-  res.render("manufacturers.ejs", { info: [] })
-});
+app.use('/manufacturers', manRouter);
 
 // salehas_clothes page
 app.get("/salehas_clothes", async (req, res) => {
