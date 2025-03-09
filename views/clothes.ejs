@@ -75,6 +75,17 @@
     </form>
   </div>
 
+  <!-- Make the text box inputs be slightly less width so everything can be on the same line -->
+  <style>
+    #name,
+    #category,
+    #price,
+    #purchaseCost,
+    #stock {
+      width: 9%;
+    }
+  </style>
+
   <p>&nbsp;</p>
   <div id="update">
     <form method="POST" action="/clothes/update" id="updateClothes">
@@ -119,7 +130,6 @@
   <!-- Make the update form auto-populate with record info based on the id -->
   <script>
     const records = <%- JSON.stringify(records); %>; // Pass server-side records to client-side JS
-    const manuNames = <%-JSON.stringify(manuNames);%>;
 
     // Event listener for dropdown change
     document.getElementById('clothesSelect').addEventListener('change', function() {
