@@ -163,7 +163,8 @@ WHERE idManufacturer = :givenIdFromForm;
 
 -- SELECTION 
 -- all Clothes display
-SELECT Clothes.name,
+SELECT Clothes.idClothes,
+  Clothes.name,
   Clothes.category,
   Clothes.size,
   Clothes.price,
