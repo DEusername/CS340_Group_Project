@@ -44,7 +44,6 @@ empRouter.post('/update', async (req, res) => {
 
 // delete employee entry.
 empRouter.post('/delete', async (req, res) => {
-  // read most current data from the db
   let [results, fields] = await db.query(queries.delete, [req.body.ID]);
   if (results.affectedRows != 1)
     console.log("delete failed");
