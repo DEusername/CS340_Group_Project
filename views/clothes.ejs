@@ -29,12 +29,12 @@
       <%records.forEach(record=> {%>
       <tr>
         <td><%=record['idClothes']%></td>
-        <td><%=record['Name']%></td>
-        <td><%=record['Category']%></td>
-        <td><%=record['Size']%></td>
-        <td><%=record['Price']%></td>
+        <td><%=record['name']%></td>
+        <td><%=record['category']%></td>
+        <td><%=record['size']%></td>
+        <td><%=record['price']%></td>
         <td><%=record['Purchase Cost']%></td>
-        <td><%=record['Stock']%></td>
+        <td><%=record['stock']%></td>
         <td><%=record['Manufacturer']%></td>
       </tr>
       <%});%>
@@ -46,26 +46,29 @@
     <form method="POST" action="/clothes/create" id="addClothes">
       <legend><strong>Add Clothes</strong></legend>
       <fieldset class="fields">
-        <label> Name </label> <input type="text" name="name">
-        <label> Category </label> <input type="text" name="category">
-        <label> Size </label> <select name="size">
-          <option value="0">&nbsp;</option>
-          <option value="1">Small</option>
-          <option value="2">Medium</option>
-          <option value="3">Large</option>
+        <label> Name </label>
+        <input type="text" name="name" required>
+        <label> Category </label>
+        <input type="text" name="category" required>
+        <label> Size </label>
+        <select name="size" required>
+          <option value="non-value">&nbsp;</option>
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
         </select>
-        <label> Price </label> <input type="text" name="price">
-        <label> Purchase Cost </label> <input type="text" name="purchaseCost">
-        <label> Stock </label> <select name="in stock?">
-          <option value="0">&nbsp;</option>
-          <option value="1">Yes</option>
-          <option value="2">No</option>
-        </select>
-        <label> Manufacturer </label> <select name="manufacturer">
-          <option value="0">&nbsp;</option>
-          <option value="1">Gucci</option>
-          <option value="2">Versace</option>
-          <option value="3">Prada</option>
+        <label> Price </label>
+        <input type="text" name="price" required>
+        <label> Purchase Cost </label>
+        <input type="text" name="purchaseCost" required>
+        <label> Stock </label>
+        <input type="text" name="stock" required>
+        <label> Manufacturer </label>
+        <select name="manufacturer" required>
+          <option value="non-value">&nbsp;</option>
+          <%manuNames.forEach(manuObj => {%>
+          <option value="<%=manuObj.name%>"><%=manuObj.name%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="addClothes" value="Add clothes">
@@ -77,33 +80,36 @@
     <form method="POST" action="/clothes/update" id="updateClothes">
       <legend><strong>Update Clothes</strong></legend>
       <fieldset class="fields">
-        <label> ID to Update </label> 
-          <select name="ID" id="clothesSelect">
-          <option value="0"> </option>
-            <% records.forEach(record => { %>
-            <option value="<%= record.idClothes %>"><%= record.idClothes %></option>
-            <% }); %>
-        </select>
-        <label> name </label> <input type="text" name="name">
-        <label> category </label> <input type="text" name="category">
-        <label> size </label> <select name="size">
+        <label> ID to Update </label>
+        <select name="ID" id="clothesSelect">
           <option value="0">&nbsp;</option>
-          <option value="1">Small</option>
-          <option value="2">Medium</option>
-          <option value="3">Large</option>
+          <% records.forEach(record => { %>
+          <option value="<%= record.idClothes %>"><%= record.idClothes %></option>
+          <% }); %>
         </select>
-        <label> price </label> <input type="text" name="price">
-        <label> purchase cost </label> <input type="text" name="purchaseCost">
-        <label> stock </label> <select name="in stock?">
-          <option value="0">&nbsp;</option>
-          <option value="1">Yes</option>
-          <option value="2">No</option>
+        <label> name </label>
+        <input type="text" name="name" id="name" required>
+        <label> category </label>
+        <input type="text" name="category" id="category" required>
+        <label> size </label>
+        <select name="size" id="size" required>
+          <option value="non-value">&nbsp;</option>
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
         </select>
-        <label> manufacturer </label> <select name="manufacturer">
-          <option value="0">&nbsp;</option>
-          <option value="1">Gucci</option>
-          <option value="2">Versace</option>
-          <option value="3">Prada</option>
+        <label> price </label>
+        <input type="text" name="price" id="price" required>
+        <label> purchase cost </label>
+        <input type="text" name="purchaseCost" id="purchaseCost" required>
+        <label> stock </label>
+        <input type="text" name="stock" id="stock" required>
+        <label> manufacturer </label>
+        <select name="manufacturer" id="manufacturer" required>
+          <option value="non-value">&nbsp;</option>
+          <%manuNames.forEach(manuObj => {%>
+          <option value="<%=manuObj.name%>"><%=manuObj.name%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="updateClothes" value="Update clothes">
@@ -112,10 +118,11 @@
 
   <!-- Make the update form auto-populate with record info based on the id -->
   <script>
-    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
-  
-  // Event listener for dropdown change
-  document.getElementById('clothesSelect').addEventListener('change', function() {
+    const records = <%- JSON.stringify(records); %>; // Pass server-side records to client-side JS
+    const manuNames = <%-JSON.stringify(manuNames);%>;
+
+    // Event listener for dropdown change
+    document.getElementById('clothesSelect').addEventListener('change', function() {
       const selectedId = this.value;
       const inputs = {
         name: document.getElementById('name'),
@@ -124,30 +131,33 @@
         price: document.getElementById('price'),
         purchaseCost: document.getElementById('purchaseCost'),
         stock: document.getElementById('stock'),
-        Manufacturers_idManufacturer: document.getElementById('Manufacturers_idManufacturer')
+        manufacturer: document.getElementById('manufacturer')
       };
 
       // Reset inputs if "0" is selected
       if (selectedId === "0") {
         inputs.name.value = '';
         inputs.category.value = '';
-        inputs.size.value = '';
+        inputs.size.value = 'non-value';
         inputs.price.value = '';
         inputs.purchaseCost.value = '';
         inputs.stock.value = '';
-        inputs.Manufacturers_idManufacturer.value = '';
+        inputs.manufacturer.value = 'non-value';
         return;
+      }
 
-        // Find the selected record
+      // Find the selected record
       const record = records.find(r => r.idClothes == selectedId);
       if (record) {
-        inputs.name.value = record['Name'] || '';
-        inputs.category.value = record['Category'] || '';
-        inputs.size.value = record['Size'] || '';
-        inputs.price.value = record['Price'] || '';
+
+        // confirmed it has all of the correct information. Why does it fail?
+        inputs.name.value = record['name'] || '';
+        inputs.category.value = record['category'] || '';
+        inputs.size.value = record['size'] || 'non-value';
+        inputs.price.value = record['price'] || '';
         inputs.purchaseCost.value = record['Purchase Cost'] || '';
-        inputs.stock.value = record['Stock'] || '';
-        inputs.Manufacturers_idManufacturer.value = record['Manufacturer'] || '';
+        inputs.stock.value = record['stock'] || '';
+        inputs.manufacturer.value = record['Manufacturer'] || 'non-value';
       }
     });
   </script>
