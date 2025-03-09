@@ -26,10 +26,10 @@
       <%records.forEach(record=> {%>
       <tr>
         <td><%=record['idManufacturer']%></td>
-        <td><%=record['Name']%></td>
-        <td><%=record['Email']%></td>
-        <td><%=record['Phone']%></td>
-        <td><%=record['Address']%></td>
+        <td><%=record['name']%></td>
+        <td><%=record['email']%></td>
+        <td><%=record['phone']%></td>
+        <td><%=record['address']%></td>
       </tr>
       <%});%>
     </table>
@@ -51,22 +51,26 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" action="/employees/update" id="updateManufacturer">
+    <form method="POST" action="/manufacturers/update" id="updateManufacturer">
       <legend><strong>Update manufacturer</strong></legend>
       <fieldset class="fields">
-        <label> ID to update </label> 
+        <label> ID to update </label>
         <select name="ID" id="manufacturerSelect">
           <option value="0"> </option>
           <% records.forEach(record => { %>
-            <option value="<%= record.idManufacturer %>"><%= record.idManufacturer %></option>
-            <% }); %>
-        </select> 
-        <label> name </label> <input type="text" name="name">
-        <label> email </label> <input type="text" name="email">
-        <label> phone # </label> <input type="tel" name="phone">
-        <label> address </label> <input type="text" name="address">
+          <option value="<%= record.idManufacturer %>"><%= record.idManufacturer %></option>
+          <% }); %>
+        </select>
+        <label> name </label>
+        <input type="text" name="name" id="name" placeholder="Enter name" required>
+        <label> email </label>
+        <input type="text" name="email" id="email" placeholder="Enter email" required>
+        <label> phone # </label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter phone number">
+        <label> address </label>
+        <input type="text" name="address" id="address" placeholder="Enter address" required>
       </fieldset>
-      <input class="btn" type="submit" id="updateManufacturer" value="Update manufacturer">
+      <input class="btn" type="submit" id="updateManufacturerButton" value="Update manufacturer">
     </form>
   </div>
 
@@ -96,10 +100,10 @@
       // Find the selected record
       const record = records.find(r => r.idManufacturer == selectedId);
       if (record) {
-        inputs.name.value = record['Name'] || '';
-        inputs.email.value = record['Email'] || '';
-        inputs.phone.value = record['Phone'] || '';
-        inputs.address.value = record['Address'] || '';
+        inputs.name.value = record['name'] || '';
+        inputs.email.value = record['email'] || '';
+        inputs.phone.value = record['phone'] || '';
+        inputs.address.value = record['address'] || '';
       }
     });
   </script>
@@ -112,8 +116,8 @@
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
           <%records.forEach(record=> {%>
-            <option value="<%=record.idManufacturer%>"><%=record.idManufacturer%></option>
-            <%});%>
+          <option value="<%=record.idManufacturer%>"><%=record.idManufacturer%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteManufacturer" value="Delete Manufacturer">
