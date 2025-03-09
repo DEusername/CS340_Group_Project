@@ -34,11 +34,22 @@ manRouter.post('/update', async (req, res) => {
 
 // delete manufacturer entry
 manRouter.post('/delete', async (req, res) => {
-  let [results, fields] = await db.query(queries.delete, [req.body.ID]);
-  if (results.affectedRows != 1)
-    console.log("delete failed");
-
-  res.redirect('/manufacturers');
+  try {
+    let [results, fields] = await db.query(queries.delete, [req.body.ID]);
+    if (results.affectedRows != 1)
+      console.log("delete failed");
+    res.redirect('/manufacturers');
+  } catch (error) {
+    let errMessage;
+    if (error.code === 'ER_ROW_IS_REFERENCED_2') {
+      errMessage = `A referential error occured. Please ensure you delete all 
+    Clothes records that were made by the Manufacturer you just attempted to delete.
+    Then you may delete this Manufacturer.`;
+    }
+    else
+      errMessage = `An unknown error occured with the deletion of the record.`;
+    res.render('manufacturers', { message: errMessage })
+  }
 });
 
 export default manRouter;
