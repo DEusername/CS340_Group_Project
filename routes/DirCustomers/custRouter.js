@@ -34,11 +34,22 @@ custRouter.post('/update', async (req, res) => {
 
 // delete customer entry.
 custRouter.post('/delete', async (req, res) => {
-  let [results, fields] = await db.query(queries.delete, [req.body.ID]);
-  if (results.affectedRows != 1)
-    console.log("delete failed");
-
-  res.redirect('/customers');
+  try {
+    let [results, fields] = await db.query(queries.delete, [req.body.ID]);
+    if (results.affectedRows != 1)
+      console.log("delete failed");
+    res.redirect('/customers');
+  } catch (error) {
+    let errMessage;
+    if (error.code === 'ER_ROW_IS_REFERENCED_2') {
+      errMessage = `A referential error occured. Please ensure you delete all 
+    Sales records that involved the Customer you just attempted to delete.
+    Then you may delete the Customer record you tried to delete.`;
+    }
+    else
+      errMessage = `An unknown error occured with the deletion of the record.`;
+    res.render('customers', { message: errMessage })
+  }
 });
 
 export default custRouter;

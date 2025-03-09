@@ -9,8 +9,22 @@
 <body>
   <h1>Customers</h1>
 
-  [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
-  <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
+  [ <a href="/employees">Employees</a> | <a href="/customers">Customers</a> | <a href="/sales">Sales</a> |
+  <a href="/salehas_clothes">Sale Has Clothes</a> | <a href="/clothes">Clothes</a> | <a href="/manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
+
+  <%if(typeof(message) !== 'undefined') {%>
+
+  <div>
+    <p>
+      <%= message %>
+    </p>
+    <p>
+      Please reload the page by selecting a navigation bar element, or by clicking this link:
+      <a href="/customers">Customers</a>
+    </p>
+  </div>
+
+  <%} else {%>
 
   <div id="browse">
     <p> </p>
@@ -62,13 +76,13 @@
           <% }); %>
         </select>
         <label> first name </label>
-        <input type="text" name="firstName" id="firstName" placeholder="Enter first name" required>
+        <input type="text" name="firstName" id="firstName" required>
         <label> last name </label>
-        <input type="text" name="lastName" id="lastName" placeholder="Enter last name" required>
+        <input type="text" name="lastName" id="lastName" required>
         <label> email </label>
-        <input type="text" name="email" id="email" placeholder="Enter email" required>
+        <input type="text" name="email" id="email" required>
         <label> phone # </label>
-        <input type="tel" name="phone" id="phone" placeholder="Enter phone number">
+        <input type="tel" name="phone" id="phone">
       </fieldset>
       <input class="btn" type="submit" id="updateCustomer" value="Save update customer">
     </form>
@@ -123,6 +137,7 @@
       <input class="btn" type="submit" id="DeleteCustomers" value="Delete Customer">
     </form>
   </div>
+  <%}%>
 
 </body>
 
