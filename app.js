@@ -2,6 +2,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 
+import custRouter from './routes/DirCustomers/custRouter.js';
 import empRouter from './routes/DirEmployees/empRouter.js';
 
 // Get the filename and directory name
@@ -24,10 +25,7 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", { info: [] })
 });
 
-// customer page
-app.get("/customers", async (req, res) => {
-  res.render("customers.ejs", { info: [] })
-});
+app.use('/customers', custRouter);
 
 app.use('/employees', empRouter);
 

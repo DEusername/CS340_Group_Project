@@ -22,38 +22,27 @@
         <th>email</th>
         <th>phone</th>
       </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
       <tr>
-        <td>1</td>
-        <td>Ben</td>
-        <td>Gulbranson</td>
-        <td>beng@gmail.com</td>
-        <td>(541)555-5739</td>
+        <td><%=record['idCustomer']%></td>
+        <td><%=record['First Name']%></td>
+        <td><%=record['Last Name']%></td>
+        <td><%=record['email']%></td>
+        <td><%=record['phone']%></td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Parsa</td>
-        <td>Fallah</td>
-        <td>parsaf@gmail.com</td>
-        <td>(541)555-2849</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Jade</td>
-        <td>Carey</td>
-        <td>jadec@gmail.com</td>
-        <td>(541)555-5533</td>
-      </tr>
+      <%});%>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addCustomer">
+    <form method="POST" action="/customers/create" id="addCustomer">
       <legend><strong>Add customer</strong></legend>
       <fieldset class="fields">
-        <label> first name </label> <input type="text" name="firstName">
-        <label> last name </label> <input type="text" name="lastName">
-        <label> email </label> <input type="text" name="email">
+        <label> first name </label> <input type="text" name="firstName" required>
+        <label> last name </label> <input type="text" name="lastName" required>
+        <label> email </label> <input type="text" name="email" required>
         <label> phone # </label> <input type="tel" name="phone">
       </fieldset>
       <input class="btn" type="submit" id="addEmployee" value="Add customer">
@@ -62,34 +51,73 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="UpdateCustomer">
+    <form method="POST" action="/customers/update" id="UpdateCustomer">
       <legend><strong>Update customer</strong></legend>
       <fieldset class="fields">
-        <label> ID to update </label> <select name="ID">
+        <label> ID to update </label>
+        <select name="ID" id="customerSelect">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <% records.forEach(record => { %>
+          <option value="<%= record.idCustomer %>"><%= record.idCustomer %></option>
+          <% }); %>
         </select>
-        <label> first name </label> <input type="text" name="firstName">
-        <label> last name </label> <input type="text" name="lastName">
-        <label> email </label> <input type="text" name="email">
-        <label> phone # </label> <input type="tel" name="phone">
+        <label> first name </label>
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name" required>
+        <label> last name </label>
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name" required>
+        <label> email </label>
+        <input type="text" name="email" id="email" placeholder="Enter email" required>
+        <label> phone # </label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter phone number">
       </fieldset>
       <input class="btn" type="submit" id="updateCustomer" value="Save update customer">
     </form>
   </div>
 
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
+
+    // Event listener for dropdown change
+    document.getElementById('customerSelect').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        firstName: document.getElementById('firstName'),
+        lastName: document.getElementById('lastName'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone')
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.firstName.value = '';
+        inputs.lastName.value = '';
+        inputs.email.value = '';
+        inputs.phone.value = '';
+        return;
+      }
+
+      // Find the selected record
+      const record = records.find(r => r.idCustomer == selectedId);
+      if (record) {
+        inputs.firstName.value = record['First Name'] || '';
+        inputs.lastName.value = record['Last Name'] || '';
+        inputs.email.value = record.email || '';
+        inputs.phone.value = record.phone || '';
+      }
+    });
+  </script>
+
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteCustomers">
+    <form method="POST" action="/customers/delete" id="deleteCustomers">
       <legend><strong>Delete customer</strong></legend>
       <fieldset class="fields">
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idCustomer%>"><%=record.idCustomer%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteCustomers" value="Delete Customer">
