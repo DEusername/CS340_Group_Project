@@ -54,10 +54,10 @@
     <form method="POST" action="/manufacturers/create" id="addManufacturer">
       <legend><strong>Add manufacturer</strong></legend>
       <fieldset class="fields">
-        <label> name </label> <input type="text" name="name">
-        <label> email </label> <input type="text" name="email">
+        <label> name </label> <input type="text" name="name" required>
+        <label> email </label> <input type="text" name="email" required>
         <label> phone # </label> <input type="tel" name="phone">
-        <label> address </label> <input type="text" name="address">
+        <label> address </label> <input type="text" name="address" required>
       </fieldset>
       <input class="btn" type="submit" id="addManufacturer" value="Add manufacturer">
     </form>

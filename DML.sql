@@ -191,7 +191,7 @@ VALUES
   :givenStock,
   (
     SELECT idManufacturer
-    FROM Manufacturer
+    FROM Manufacturers
     WHERE name = :givenManuName
   )
 );
@@ -207,7 +207,7 @@ SET name = :givenName,
   Manufacturers_idManufacturer = 
   (
     SELECT idManufacturer
-    FROM Manufacturer
+    FROM Manufacturers
     WHERE name = :givenManuName
   )
 WHERE idClothes = :givenIdFromForm;
