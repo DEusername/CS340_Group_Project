@@ -39,6 +39,7 @@ custRouter.post('/delete', async (req, res) => {
     if (results.affectedRows != 1)
       console.log("delete failed");
     res.redirect('/customers');
+    return
   } catch (error) {
     let errMessage;
     if (error.code === 'ER_ROW_IS_REFERENCED_2') {
@@ -49,6 +50,7 @@ custRouter.post('/delete', async (req, res) => {
     else
       errMessage = `An unknown error occured with the deletion of the record.`;
     res.render('customers', { message: errMessage })
+    return
   }
 });
 
