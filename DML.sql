@@ -221,8 +221,8 @@ WHERE idClothes = :givenIdFromForm;
 -- --------------------------------------------------
 
 -- SELECTION 
-SELECT Customers.firstName AS "Customer's First Name", 
-  Customers.lastName AS "Customer's Last Name", 
+SELECT Customers.firstName AS "Customer First Name", 
+  Customers.lastName AS "Customer Last Name", 
   Sales.date AS 'Datetime', 
   Clothes.name AS 'Clothes Name', 
   Manufacturers.name AS 'Manufacturer', 
