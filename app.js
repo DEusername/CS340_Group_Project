@@ -6,6 +6,7 @@ import custRouter from './routes/DirCustomers/custRouter.js';
 import empRouter from './routes/DirEmployees/empRouter.js';
 import cloRouter from './routes/DirClothes/cloRouter.js';
 import manRouter from './routes/DirManufacturers/manRouter.js';
+import saleCloRouter from "./routes/DirSaleHasClothes/saleCloRouter.js";
 
 // Get the filename and directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -40,22 +41,7 @@ app.use('/clothes', cloRouter);
 
 app.use('/manufacturers', manRouter);
 
-// salehas_clothes page
-app.get("/salehas_clothes", async (req, res) => {
-  res.render("salehas_clothes.ejs", { info: [] })
-});
-
-// being buggy right now, so commented it out.
-// error handler
-// app.use(function (err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render("error");
-// });
+app.use('/salehas_clothes', saleCloRouter)
 
 const PORT = 7642;
 app.listen(PORT, () => {
