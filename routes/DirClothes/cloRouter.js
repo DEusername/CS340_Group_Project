@@ -30,7 +30,7 @@ cloRouter.post('/create', async (req, res) => {
 
 // update clothes entry data
 cloRouter.post('/update', async (req, res) => {
-  if (req.body.ID !== 'non-value') {
+  if (req.body.ID !== '0') {
     if (req.body.size !== 'non-value' && req.body.manufacturer !== 'non-value') {
       let [results, fields] = await db.query(queries.update, [req.body.name, req.body.category, req.body.size, req.body.price, req.body.purchaseCost, req.body.stock, req.body.manufacturer, req.body.ID]);
       if (results.affectedRows != 1)
@@ -58,7 +58,7 @@ cloRouter.post('/update', async (req, res) => {
 
 // delete clothes entry
 cloRouter.post('/delete', async (req, res) => {
-  if (req.body.ID !== 'non-value') {
+  if (req.body.ID !== '0') {
     try {
       let [results, fields] = await db.query(queries.delete, [req.body.ID]);
       if (results.affectedRows != 1)
