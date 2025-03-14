@@ -12,6 +12,20 @@
   [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
   <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
 
+  <%if(typeof(message) !== 'undefined') {%>
+
+  <div>
+    <p>
+      <%= message %>
+    </p>
+    <p>
+      Please reload the page by selecting a navigation bar element, or by clicking this link:
+      <a href="/clothes">Clothes</a>
+    </p>
+  </div>
+
+  <%} else {%>
+
   <div id="browse">
     <p> </p>
     <table border="1" cellpadding="5">
@@ -187,6 +201,8 @@
       <input class="btn" type="submit" id="DeleteClothes" value="Delete Clothes">
     </form>
   </div>
+
+  <%}%>
 
 </body>
 
