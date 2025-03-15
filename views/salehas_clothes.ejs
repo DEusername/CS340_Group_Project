@@ -12,6 +12,20 @@
   [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
   <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
 
+  <%if(typeof(message) !== 'undefined') {%>
+
+  <div>
+    <p>
+      <%= message %>
+    </p>
+    <p>
+      Please reload the page by selecting a navigation bar element, or by clicking this link:
+      <a href="/salehas_clothes">Sale Has Clothes</a>
+    </p>
+  </div>
+
+  <%} else {%>
+
   <div id="browse">
     <p> </p>
     <table border="1" cellpadding="5">
@@ -21,70 +35,51 @@
         <th>Customer's Last Name</th>
         <th>Datetime</th>
         <th>Clothes Name</th>
+        <th>Size</th>
         <th>Manufacturer</th>
         <th>Quantity</th>
       </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
       <tr>
-        <td>1</td>
-        <td>Ben</td>
-        <td>Gulbranson</td>
-        <td>03/21/2018 14:30:00</td>
-        <td>Shirt</td>
-        <td>Gucci</td>
-        <td>1</td>
+        <td><%=record['idSaleHasClothes']%></td>
+        <td><%=record['Customer First Name']%></td>
+        <td><%=record['Customer Last Name']%></td>
+        <td><%=record['Datetime']%></td>
+        <td><%=record['Clothes Name']%></td>
+        <td><%=record['size']%></td>
+        <td><%=record['Manufacturer']%></td>
+        <td><%=record['quantity']%></td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Ben</td>
-        <td>Gulbranson</td>
-        <td>03/21/2018 14:30:00</td>
-        <td>Coat</td>
-        <td>Versace</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Parsa</td>
-        <td>Fallah</td>
-        <td>07/05/2023 15:20:00</td>
-        <td>Coat</td>
-        <td>Versace</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Jade</td>
-        <td>Carey</td>
-        <td>09/29/2024 09:30:00</td>
-        <td>Pants</td>
-        <td>Prada</td>
-        <td>1</td>
-      </tr>
+      <%});%>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addSaleHasClothes">
+    <form method="POST" action="/salehas_clothes/create" id="addSaleHasClothes">
       <legend><strong>Add sale with clothes</strong></legend>
       <fieldset class="fields">
-        <label> Customer Name </label> <select name="customerName">
+        <label for="saleInfoCreate">Sale Information</label>
+        <select name="saleInfoID" id="saleInfoCreate">
           <option value="0">&nbsp;</option>
-          <option value="1">Ben Gulbranson</option>
-          <option value="2">Parsa Fallah</option>
-          <option value="3">Jade Carey</option>
+          <%saleInfo.forEach(sale=> {%>
+          <option value="<%=sale.idSale%>">
+            <%=`${sale.firstName} ${sale.lastName} - ${sale.date}`%>
+          </option>
+          <%});%>
         </select>
-        <label> Datetime </label> <input type="datetime-local" name="datetime">
-        <label> Clothes Name </label> <input type="text" name="clothesName">
-        <label> Manufacturer </label> <select name="manufacturer">
+        <label for="clothesInfoCreate">Clothes Information</label>
+        <select name="clothesInfoID" id="clothesInfoCreate">
           <option value="0">&nbsp;</option>
-          <option value="1">Gucci</option>
-          <option value="2">Versace</option>
-          <option value="3">Prada</option>
-          <option value="4">Nike</option>
-          <option value="5">Uniqlo</option>
+          <%clothesInfo.forEach(clothes=> {%>
+          <option value="<%=clothes['idClothes']%>">
+            <%=`${clothes['Clothes Name']} | ${clothes.size} - ${clothes['Manufacturer Name']}`%>
+          </option>
+          <%});%>
         </select>
-        <label> Quantity </label> <input type="text" name="quantity">
+        <label> Quantity </label>
+        <input type="text" name="quantity" required>
       </fieldset>
       <input class="btn" type="submit" id="addSaleHasClothes" value="Add sale with clothes">
     </form>
@@ -92,54 +87,108 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateSaleHasClothes">
+    <form method="POST" action="/salehas_clothes/update" id="updateSaleHasClothes">
       <legend><strong>Update sale with clothes</strong></legend>
       <fieldset class="fields">
-        <label> ID to update </label> <select name="ID">
+        <label for="saleClothesID">Sale Has Clothes ID</label>
+        <select name="saleClothesID" id="saleClothesID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record.idSaleHasClothes%>"><%=record.idSaleHasClothes%></option>
+          <%});%>
         </select>
-        <label> Customer Name </label> <select name="customerName">
+        <label for="saleInfoUpdate">Sale Information</label>
+        <select name="saleInfoID" id="saleInfoUpdate">
           <option value="0">&nbsp;</option>
-          <option value="1">Ben Gulbranson</option>
-          <option value="2">Parsa Fallah</option>
-          <option value="3">Jade Carey</option>
+          <%saleInfo.forEach(sale=> {%>
+          <option value="<%=sale.idSale%>">
+            <%=`${sale.firstName} ${sale.lastName} - ${sale.date}`%>
+          </option>
+          <%});%>
         </select>
-        <label> Datetime </label> <input type="datetime-local" name="datetime">
-        <label> Clothes Name </label> <input type="text" name="clothesName">
-        <label> Manufacturer </label> <select name="manufacturer">
+        <label for="clothesInfoUpdate">Clothes Information</label>
+        <select name="clothesInfoID" id="clothesInfoUpdate">
           <option value="0">&nbsp;</option>
-          <option value="1">Gucci</option>
-          <option value="2">Versace</option>
-          <option value="3">Prada</option>
-          <option value="4">Nike</option>
-          <option value="5">Uniqlo</option>
+          <%clothesInfo.forEach(clothes=> {%>
+          <option value="<%=clothes['idClothes']%>">
+            <%=`${clothes['Clothes Name']} | ${clothes.size} - ${clothes['Manufacturer Name']}`%>
+          </option>
+          <%});%>
         </select>
-        <label> Quantity </label> <input type="text" name="quantity">
+        <label> Quantity </label>
+        <input type="text" name="quantity" id="quantity" required>
       </fieldset>
       <input class="btn" type="submit" id="updateSaleHasClothes" value="Update sale with clothes">
     </form>
   </div>
 
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records); %>; // Pass server-side records to client-side JS
+    const saleInfo = <%-JSON.stringify(saleInfo);%>
+    const clothesInfo = <%-JSON.stringify(clothesInfo);%>
+
+    // Event listener for dropdown change
+    document.getElementById('saleClothesID').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        saleInfo: document.getElementById('saleInfoUpdate'),
+        clothesInfo: document.getElementById('clothesInfoUpdate'),
+        quantity: document.getElementById('quantity')
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.saleInfo.value = '0';
+        inputs.clothesInfo.value = '0';
+        inputs.quantity.value = '';
+        return;
+      }
+
+      // Find the selected record
+      const record = records.find(r => r.idSaleHasClothes == selectedId);
+      const sale = saleInfo.find(s =>
+        s.firstName == record['Customer First Name'] &&
+        s.lastName == record['Customer Last Name'] &&
+        s.date == record['Datetime']
+      )
+      const clothes = clothesInfo.find(c =>
+        c['Clothes Name'] == record['Clothes Name'] &&
+        c.size == record.size &&
+        c['Manufacturer Name'] == record['Manufacturer']
+      )
+      if (record) {
+        inputs.saleInfo.value = sale['idSale'] || '0';
+        inputs.clothesInfo.value = clothes['idClothes'] || '0';
+        inputs.quantity.value = record['quantity'] || '';
+
+        console.log(inputs.saleInfo.value);
+        console.log(inputs.clothesInfo.value);
+        console.log(inputs.quantity.value);
+      }
+    });
+  </script>
+
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteSaleHasClothes">
+    <form method="POST" action="/salehas_clothes/delete" id="deleteSaleHasClothes">
       <legend><strong>Delete sale with clothes</strong></legend>
       <fieldset class="fields">
-        <label> ID </label> <select name="ID">
+        <label> ID </label>
+        <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <%records.forEach(record=> {%>
+          <option value="<%=record['idSaleHasClothes']%>">
+            <%=record['idSaleHasClothes']%>
+          </option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteSaleHasClothes" value="Delete SaleHasClothes">
     </form>
   </div>
+
+  <%}%>
 
 </body>
 
