@@ -80,7 +80,7 @@ INNER JOIN Customers ON Sales.Customers_idCustomer = Customers_idCustomer
 INNER JOIN Employees ON Sales.Employees_idEmployee = Employees_idEmployee;
 
 -- populate drop down menu for making a SaleHasClothes entry
-SELECT Customers.firstName, Customers.lastName, Sales.date
+SELECT Sales.idSale, Customers.firstName, Customers.lastName, Sales.date
 FROM Sales
 INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer;
 
@@ -175,9 +175,9 @@ FROM Clothes
 INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer;
 
 -- populate drop down menu for making a SaleHasClothes entry
-SELECT Clothes.name, Clothes.size, Manufacturer.name
+SELECT Clothes.idClothes, Clothes.name AS 'Clothes Name', Clothes.size, Manufacturers.name AS 'Manufacturer Name'
 FROM Clothes
-INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturer.idManufacturer;
+INNER JOIN Manufacturers ON Clothes.Manufacturers_idManufacturer = Manufacturers.idManufacturer;
 
 -- INSERTION
 INSERT INTO Clothes (name, category, size, price, purchaseCost, stock, Manufacturers_idManufacturer)
@@ -221,10 +221,12 @@ WHERE idClothes = :givenIdFromForm;
 -- --------------------------------------------------
 
 -- SELECTION 
-SELECT Customers.firstName AS "Customer First Name", 
+SELECT SaleHasClothes.idSaleHasClothes,
+  Customers.firstName AS "Customer First Name", 
   Customers.lastName AS "Customer Last Name", 
   Sales.date AS 'Datetime', 
   Clothes.name AS 'Clothes Name', 
+  Clothes.size,
   Manufacturers.name AS 'Manufacturer', 
   SaleHasClothes.quantity
 FROM SaleHasClothes
