@@ -24,7 +24,12 @@ cloRouter.post('/create', async (req, res) => {
     res.redirect('/clothes');
   }
   else {
-
+    let nonValMessage;
+    nonValMessage = `You tried to submit the create form with no dropdown 
+    item selected for a record. Please make sure all dropdowns are filled with 
+    adequate information.`
+    res.render('clothes', { message: nonValMessage })
+    return
   }
 });
 
