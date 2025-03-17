@@ -16,7 +16,8 @@ SELECT idEmployee,
 FROM Employees;
 
 -- populate drop down menu for making a sale
-SELECT firstName, lastName
+SELECT idEmployee,
+  CONCAT(firstName, ' ', lastName) AS 'Employee Name'
 FROM Employees;
 
 -- INSERTION
@@ -47,7 +48,8 @@ SELECT idCustomer,
 FROM Customers;
 
 -- populate drop down menu for making a sale
-SELECT firstName, lastName
+SELECT idCustomer,
+  CONCAT(firstName, ' ', lastName) AS 'Customer Name'
 FROM Customers;
 
 -- INSERTION
@@ -70,14 +72,15 @@ WHERE idCustomer = :givenIdFromForm;
 
 -- SELECTION 
 -- all Sales display
-SELECT Sales.discountPercent AS 'Discount Percent',
+SELECT Sales.idSale,
+  Sales.discountPercent AS 'Discount Percent',
   Sales.payment,
   Sales.date,
   CONCAT(Customers.firstName, ' ', Customers.lastName) AS 'Customer',
   CONCAT(Employees.firstName, ' ', Employees.lastName) AS 'Employee'
 FROM Sales
-INNER JOIN Customers ON Sales.Customers_idCustomer = Customers_idCustomer
-INNER JOIN Employees ON Sales.Employees_idEmployee = Employees_idEmployee;
+INNER JOIN Customers ON Sales.Customers_idCustomer = Customers.idCustomer
+LEFT JOIN Employees ON Sales.Employees_idEmployee = Employees.idEmployee;
 
 -- populate drop down menu for making a SaleHasClothes entry
 SELECT Sales.idSale, Customers.firstName, Customers.lastName, Sales.date
@@ -91,18 +94,8 @@ VALUES
   :givenDiscountPercentage, 
   :givenPayment, 
   :givenDate, 
-  (
-    SELECT idCustomer
-    FROM Customers
-    WHERE firstName = :givenCusFirstName 
-    AND lastName = :givenCusLastName
-  ), 
-  (
-    SELECT idEmployee
-    FROM Employees
-    WHERE firstName = :givenEmpFirstName
-    AND lastName = :givenEmpLastName
-  )
+  :givenCustomerID,
+  :givenEmployeeID
 );
 
 -- UPDATE

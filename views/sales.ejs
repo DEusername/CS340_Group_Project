@@ -12,6 +12,20 @@
   [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="sales">Sales</a> |
   <a href="salehas_clothes">Sale Has Clothes</a> | <a href="clothes">Clothes</a> | <a href="manufacturers">Manufacturers</a> | <a href="/">Index</a> ]
 
+  <%if(typeof(message) !== 'undefined') {%>
+
+  <div>
+    <p>
+      <%= message %>
+    </p>
+    <p>
+      Please reload the page by selecting a navigation bar element, or by clicking this link:
+      <a href="/customers">Customers</a>
+    </p>
+  </div>
+
+  <%} else {%>
+
   <div id="browse">
     <p> </p>
     <table border="1" cellpadding="5">
@@ -25,38 +39,50 @@
       </tr>
       <!-- Table data fields loading in most current db records from server -->
       <%records.forEach(record=> {%>
-        <tr>
-          <td><%=record['idSale']%></td>
-          <td><%=record['discountPercent']%></td>
-          <td><%=record['payment']%></td>
-          <td><%=record['date']%></td>
-          <td><%=record['Customers_idCustomer']%></td>
-          <td><%=record['Employees_idEmployee']%></td>
-        </tr>
-        <%});%>
+      <tr>
+        <td><%=record['idSale']%></td>
+        <td><%=record['Discount Percent']%></td>
+        <td><%=record['payment']%></td>
+        <td><%=record['date']%></td>
+        <td><%=record['Customer']%></td>
+        <td><%=record['Employee'] == null ? "N/A" : record['Employee']%></td>
+      </tr>
+      <%});%>
     </table>
   </div>
+
+  <!-- Make the text box inputs be slightly less width so everything can be on the same line -->
+  <style>
+    .discPercent {
+      width: 3%;
+    }
+  </style>
 
   <p>&nbsp;</p>
   <div id="insert">
     <form method="POST" action="/sales/create" id="addSale">
       <legend><strong>Add sale</strong></legend>
       <fieldset class="fields">
-        <label> discount percent </label> <input type="text" name="discountPercent">
-        <label> payment </label> <input type="text" name="payment">
-        <label> date/time </label> <input type="datetime-local" name="date">
-        <label> customer </label> <select name="Customers_idCustomer">
+        <label> discount percent </label>
+        <input type="number" class="discPercent" step="0.01" min="0" max="1" name="discountPercent" required>
+        <label> payment </label>
+        <input type="number" step="0.01" min="0" name="payment" required>
+        <label> date/time </label>
+        <input type="datetime-local" name="date" required>
+        <label> customer </label>
+        <select name="Customers_idCustomer" required>
           <option value="0">&nbsp;</option>
-          <option value="1">Ben Gulbranson</option>
-          <option value="2">Parsa Fallah</option>
-          <option value="3">Jade Carey</option>
+          <%custInfo.forEach(customer=> {%>
+          <option value="<%=customer['idCustomer']%>"><%=customer['Customer Name']%></option>
+          <%});%>
         </select>
-        <label> employee </label> <select name="Employees_idEmployees">
+        <label> employee </label>
+        <select name="Employees_idEmployee" required>
           <option value="0">&nbsp;</option>
-          <option value="1">Alexander Addis</option>
-          <option value="2">Duncan Everson</option>
-          <option value="3">Benny Beaver</option>
-          <option value="4">N/A</option>
+          <option value="N/A">N/A</option>
+          <%empInfo.forEach(employee=> {%>
+          <option value="<%=employee['idEmployee']%>"><%=employee['Employee Name']%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="addSale" value="Add sale">
@@ -74,16 +100,21 @@
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-        <label> discount percent </label> <input type="text" name="discountPercent">
-        <label> payment </label> <input type="text" name="payment">
-        <label> date/time </label> <input type="datetime-local" name="date">
-        <label> customer </label> <select name="Customers_idCustomer">
+        <label> discount percent </label>
+        <input type="number" class="discPercent" step="0.01" min="0" max="1" name="discountPercent">
+        <label> payment </label>
+        <input type="number" step="0.01" min="0" name="payment">
+        <label> date/time </label>
+        <input type="datetime-local" name="date">
+        <label> customer </label>
+        <select name="Customers_idCustomer">
           <option value="0">&nbsp;</option>
           <option value="1">Ben Gulbranson</option>
           <option value="2">Parsa Fallah</option>
           <option value="3">Jade Carey</option>
         </select>
-        <label> employee </label> <select name="Employees_idEmployees">
+        <label> employee </label>
+        <select name="Employees_idEmployees">
           <option value="0">&nbsp;</option>
           <option value="1">Alexander Addis</option>
           <option value="2">Duncan Everson</option>
@@ -142,13 +173,16 @@
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
           <%records.forEach(record=> {%>
-            <option value="<%=record.idSale%>"><%=record.idSale%></option>
-            <%});%>
+          <option value="<%=record.idSale%>"><%=record.idSale%></option>
+          <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteSale" value="Delete Sale">
     </form>
   </div>
+
+  <%}%>
+
 </body>
 
 </html>
