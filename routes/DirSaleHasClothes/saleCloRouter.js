@@ -19,7 +19,6 @@ saleCloRouter.get('/', async (req, res) => {
 // create SaleHasClothes entry
 saleCloRouter.post('/create', async (req, res) => {
   if (req.body.saleInfoID !== '0' && req.body.clothesInfoID !== '0') {
-    console.log("tried to query");
     let [results, fields] = await db.query(queries.create, [req.body.saleInfoID, req.body.clothesInfoID, req.body.quantity]);
     if (results.affectedRows != 1)
       console.log("create failed");

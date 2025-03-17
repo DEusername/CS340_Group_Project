@@ -35,20 +35,47 @@ empRouter.post('/create', async (req, res) => {
 
 // update employee entry data
 empRouter.post('/update', async (req, res) => {
-  let [results, fields] = await db.query(queries.update, [req.body.firstName, req.body.lastName, req.body.hireDate, req.body.email, req.body.phone, req.body.ID]);
-  if (results.affectedRows != 1)
-    console.log("update failed")
+  if (req.body.ID !== '0') {
+    let [results, fields] = await db.query(queries.update, [req.body.firstName, req.body.lastName, req.body.hireDate, req.body.email, req.body.phone, req.body.ID]);
+    if (results.affectedRows != 1)
+      console.log("update failed")
 
-  res.redirect('/employees');
+    res.redirect('/employees');
+    return
+  }
+  else {
+    let nonValMessage;
+    nonValMessage = `You tried to submit the update form with no ID selected. 
+    Please select an ID and try again.`
+    res.render('employees', { message: nonValMessage })
+    return
+  }
 });
 
 // delete employee entry.
 empRouter.post('/delete', async (req, res) => {
-  let [results, fields] = await db.query(queries.delete, [req.body.ID]);
-  if (results.affectedRows != 1)
-    console.log("delete failed");
+  if (req.body.ID !== '0') {
+    try {
+      let [results, fields] = await db.query(queries.delete, [req.body.ID]);
+      if (results.affectedRows != 1)
+        console.log("delete failed");
 
-  res.redirect('/employees');
+      res.redirect('/employees');
+      return
+    } catch (error) {
+      let errMessage;
+      errMessage = `An unknown error occured with the deletion of the record.`;
+      res.render('employees', { message: errMessage })
+      return
+    }
+  }
+  else {
+    let nonValMessage;
+    nonValMessage = `You tried to submit the deletion form with no ID selected. 
+    Please select an ID and try again.`
+    res.render('employees', { message: nonValMessage })
+    return
+  }
 });
 
 export default empRouter;

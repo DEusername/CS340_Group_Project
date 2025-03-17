@@ -74,7 +74,7 @@ cloRouter.post('/delete', async (req, res) => {
       let errMessage;
       if (error.code === 'ER_ROW_IS_REFERENCED_2') {
         errMessage = `A referential error occured. To allow this clothing record to be
-        deleted, you need to delete all SaleHasClothes record involving this clothing
+        deleted, you need to delete all Sale Has Clothes records involving this clothing
         item.`;
       }
       else
