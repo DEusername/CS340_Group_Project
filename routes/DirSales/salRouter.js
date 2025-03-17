@@ -28,7 +28,8 @@ salRouter.post('/create', async (req, res) => {
 
 // update sale entry data
 salRouter.post('/update', async (req, res) => {
-  let [results, fields] = await db.query(queries.update, [req.body.discountPercent, req.body.payment, req.body.date, req.body.Customers_idCustomer, req.body.Employees_idEmployee, req.body.ID]);
+  let employeeID = req.body.Employees_idEmployee === "N/A" ? null : req.body.Employees_idEmployee;
+  let [results, fields] = await db.query(queries.update, [req.body.discountPercent, req.body.payment, req.body.date, req.body.Customers_idCustomer, employeeID, req.body.ID]);
   if (results.affectedRows != 1)
     console.log("update failed");
 

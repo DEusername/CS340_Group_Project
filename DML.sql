@@ -103,21 +103,9 @@ UPDATE Sales
 SET discountPercent = :givenDiscountPercentage, 
   payment = :givenPayment,
   date = :givenDate,
-  Customers_idCustomer = 
-  (
-    SELECT idCustomer
-    FROM Customers
-    WHERE firstName = :givenCusFirstName 
-    AND lastName = :givenCusLastName
-  ),
-  Employees_idEmployee = 
-  (
-    SELECT idEmployee
-    FROM Employees
-    WHERE firstName = :givenEmpFirstName
-    AND lastName = :givenEmpLastName
-  )
-WHERE idCustomer = :givenIdFromForm;
+  Customers_idCustomer = :givenCustomerID
+  Employees_idEmployee = :givenEmployeeID
+WHERE idSale = :givenIdFromForm;
 
 -- DELETE
 DELETE FROM Sales 
