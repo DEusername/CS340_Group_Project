@@ -4,6 +4,7 @@ import express from "express";
 
 import custRouter from './routes/DirCustomers/custRouter.js';
 import empRouter from './routes/DirEmployees/empRouter.js';
+import salRouter from './routes/DirSales/salRouter.js'
 import cloRouter from './routes/DirClothes/cloRouter.js';
 import manRouter from './routes/DirManufacturers/manRouter.js';
 import saleCloRouter from "./routes/DirSaleHasClothes/saleCloRouter.js";
@@ -32,10 +33,7 @@ app.use('/customers', custRouter);
 
 app.use('/employees', empRouter);
 
-// sale page
-app.get("/sales", async (req, res) => {
-  res.render("sales.ejs", { info: [] })
-});
+app.use('/sales', salRouter);
 
 app.use('/clothes', cloRouter);
 
