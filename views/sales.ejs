@@ -23,36 +23,23 @@
         <th>Customer</th>
         <th>Employee</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>0.1</td>
-        <td>9.89</td>
-        <td>03/21/2018 14:30:00</td>
-        <td>Ben Gulbranson</td>
-        <td>Alexander Addis</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>0.25</td>
-        <td>40.88</td>
-        <td>07/05/2023 15:20:00</td>
-        <td>Parsa Fallah</td>
-        <td>Duncan Everson</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>0.05</td>
-        <td>20.89</td>
-        <td>09/29/2024 09:30:00</td>
-        <td>Jade Carey</td>
-        <td>Benny Beaver</td>
-      </tr>
+      <!-- Table data fields loading in most current db records from server -->
+      <%records.forEach(record=> {%>
+        <tr>
+          <td><%=record['idSale']%></td>
+          <td><%=record['discountPercent']%></td>
+          <td><%=record['payment']%></td>
+          <td><%=record['date']%></td>
+          <td><%=record['Customers_idCustomer']%></td>
+          <td><%=record['Employees_idEmployee']%></td>
+        </tr>
+        <%});%>
     </table>
   </div>
 
   <p>&nbsp;</p>
   <div id="insert">
-    <form method="POST" id="addSale">
+    <form method="POST" action="/sales/create" id="addSale">
       <legend><strong>Add sale</strong></legend>
       <fieldset class="fields">
         <label> discount percent </label> <input type="text" name="discountPercent">
@@ -78,7 +65,7 @@
 
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updateSale">
+    <form method="POST" action="/sales/update" id="updateSale">
       <legend><strong>Add sale</strong></legend>
       <fieldset class="fields">
         <label> ID to update </label> <select name="ID">
@@ -108,16 +95,55 @@
     </form>
   </div>
 
+  <!-- Make the update form auto-populate with record info based on the id -->
+  <script>
+    const records = <%- JSON.stringify(records) %>; // Pass server-side records to client-side JS
+
+    // Event listener for dropdown change
+    document.getElementById('salesSelect').addEventListener('change', function() {
+      const selectedId = this.value;
+      const inputs = {
+        discountPercent: document.getElementById('discountPercent'),
+        payment: document.getElementById('payment'),
+        date: document.getElementById('date'),
+        Customers_idCustomer: document.getElementById('Customers_idCustomer'),
+        Employees_idEmployees: document.getElementById('Employees_idEmployees'),
+      };
+
+      // Reset inputs if "0" is selected
+      if (selectedId === "0") {
+        inputs.discountPercent.value = '';
+        inputs.payment.value = '';
+        inputs.date.value = '';
+        inputs.Customers_idCustomer.value = '';
+        inputs.Employees_idEmployee.value = '';
+        return;
+      }
+
+      // Find the selected record
+      const record = records.find(r => r.idSale == selectedId);
+      if (record) {
+
+        // confirmed it has all of the correct information. Why does it fail?
+        inputs.discountPercent.value = record['discountPercent'] || '';
+        inputs.payment.value = record['payment'] || '';
+        inputs.date.value = record['date'] || '';
+        inputs.Customers_idCustomer.value = record['price'] || '';
+        inputs.Employees_idEmployee.value = record['Purchase Cost'] || '';
+      }
+    });
+  </script>
+
   <p>&nbsp;</p>
   <div id="delete" style="display: block">
-    <form method="POST" id="deleteSale">
+    <form method="POST" action="/sales/delete" id="deleteSale">
       <legend><strong>Delete sale</strong></legend>
       <fieldset class="fields">
         <label> ID </label> <select name="ID">
           <option value="0">&nbsp;</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <%records.forEach(record=> {%>
+            <option value="<%=record.idSale%>"><%=record.idSale%></option>
+            <%});%>
         </select>
       </fieldset>
       <input class="btn" type="submit" id="DeleteSale" value="Delete Sale">
