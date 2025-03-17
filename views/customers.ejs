@@ -54,10 +54,14 @@
     <form method="POST" action="/customers/create" id="addCustomer">
       <legend><strong>Add customer</strong></legend>
       <fieldset class="fields">
-        <label> first name </label> <input type="text" name="firstName" required>
-        <label> last name </label> <input type="text" name="lastName" required>
-        <label> email </label> <input type="text" name="email" required>
-        <label> phone # </label> <input type="tel" name="phone">
+        <label> first name </label>
+        <input type="text" name="firstName" required>
+        <label> last name </label>
+        <input type="text" name="lastName" required>
+        <label> email </label>
+        <input type="email" name="email" required>
+        <label> phone # </label>
+        <input type="tel" name="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
       </fieldset>
       <input class="btn" type="submit" id="addEmployee" value="Add customer">
     </form>
@@ -82,7 +86,7 @@
         <label> email </label>
         <input type="text" name="email" id="email" required>
         <label> phone # </label>
-        <input type="tel" name="phone" id="phone">
+        <input type="tel" name="phone" id="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
       </fieldset>
       <input class="btn" type="submit" id="updateCustomer" value="Save update customer">
     </form>

@@ -54,10 +54,14 @@
     <form method="POST" action="/manufacturers/create" id="addManufacturer">
       <legend><strong>Add manufacturer</strong></legend>
       <fieldset class="fields">
-        <label> name </label> <input type="text" name="name" required>
-        <label> email </label> <input type="text" name="email" required>
-        <label> phone # </label> <input type="tel" name="phone">
-        <label> address </label> <input type="text" name="address" required>
+        <label> name </label>
+        <input type="text" name="name" required>
+        <label> email </label>
+        <input type="email" name="email" required>
+        <label> phone # </label>
+        <input type="tel" name="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
+        <label> address </label>
+        <input type="text" name="address" required>
       </fieldset>
       <input class="btn" type="submit" id="addManufacturer" value="Add manufacturer">
     </form>
@@ -80,7 +84,7 @@
         <label> email </label>
         <input type="text" name="email" id="email" required>
         <label> phone # </label>
-        <input type="tel" name="phone" id="phone">
+        <input type="tel" name="phone" id="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
         <label> address </label>
         <input type="text" name="address" id="address" required>
       </fieldset>
