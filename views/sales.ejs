@@ -64,7 +64,7 @@
       <legend><strong>Add sale</strong></legend>
       <fieldset class="fields">
         <label> discount percent </label>
-        <input type="number" class="discPercent" step="0.01" min="0" max="1" name="discountPercent" required>
+        <input type="number" class="discPercent" step="0.01" min="0" max="1" name="discountPercent" default="0">
         <label> payment </label>
         <input type="number" step="0.01" min="0" name="payment" required>
         <label> date/time </label>
@@ -102,7 +102,7 @@
           <%});%>
         </select>
         <label> discount percent </label>
-        <input type="number" class="discPercent" id="discPercentUpdate" step="0.01" min="0" max="1" name="discountPercent">
+        <input type="number" class="discPercent" id="discPercentUpdate" step="0.01" min="0" max="1" name="discountPercent" default="0">
         <label> payment </label>
         <input type="number" id="paymentUpdate" step="0.01" min="0" name="payment">
         <label> date/time </label>
