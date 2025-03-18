@@ -26,8 +26,9 @@ npm install
 cd routes
 touch db-connector.js
 ```
-- Then ensure that it has the same contents as ex-db-connector.js, where <HOST> is switched for the hosting server name, <USERNAME> is swapped for the username you are going to use to connect to the database, <PASSWORD> is swapped to the associated password for your username, and <DATABASE> is swapped with the database name you are going to connect to.
-- Import the database tables in your database of choice using the creation.sql file to create the Employees, Customers, Sales, SaleHasClothes, Clothes, and Manufacturers tables that are required for the database management system to run.
+- Then ensure that it has the same contents as `ex-db-connector.js`, where `&lt;HOST&gt;` is swapped for the hosting server name, `&lt;USERNAME&gt;` is swapped for the username you are going to use to connect to the database, `&lt;PASSWORD&gt;` is swapped to the associated password for your username, and `&lt;DATABASE&gt;` is swapped with the database name you are going to connect to.
+- Import the database tables into the database used for `&lt;DATABASE&gt;` using the `creation.sql` file to create the Employees, Customers, Sales, SaleHasClothes, Clothes, and Manufacturers tables that are required for the database management system to run.
+
 
 ## Usage
 To run the project, use the following command:
@@ -52,9 +53,9 @@ git push origin feature-name
 This project is licensed under the [MIT License](./LICENSE).
 
 ## Citations
-All code in this project is original work, with the exception of the database connection code found in the db-connector.js and ex-db-connector.js files.
+All code in this project is original work, with the exception of the database connection code found in the routes/db-connector.js and routes/ex-db-connector.js files.
 
-### db-connector.js / ex-db-connector.js Citation
+### routes/db-connector.js and routes/ex-db-connector.js Citation
 
 ```JavaScript
 /**
