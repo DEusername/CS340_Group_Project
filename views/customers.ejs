@@ -42,8 +42,8 @@
         <td><%=record['idCustomer']%></td>
         <td><%=record['First Name']%></td>
         <td><%=record['Last Name']%></td>
-        <td><%=record['email']%></td>
-        <td><%=record['phone']%></td>
+        <td><%=record['email'] === null ? "N/A" : record['email']%></td>
+        <td><%=record['phone'] === null ? "N/A" : record['email']%></td>
       </tr>
       <%});%>
     </table>
@@ -59,7 +59,7 @@
         <label> last name </label>
         <input type="text" name="lastName" required>
         <label> email </label>
-        <input type="email" name="email" required>
+        <input type="email" name="email">
         <label> phone # </label>
         <input type="tel" name="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
       </fieldset>
@@ -84,7 +84,7 @@
         <label> last name </label>
         <input type="text" name="lastName" id="lastName" required>
         <label> email </label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" id="email">
         <label> phone # </label>
         <input type="tel" name="phone" id="phone" pattern="\(\d{3}\)\d{3}-\d{4}" placeholder="(xxx)xxx-xxxx">
       </fieldset>

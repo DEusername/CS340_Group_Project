@@ -16,7 +16,9 @@ custRouter.get('/', async (req, res) => {
 
 // create customer entry
 custRouter.post('/create', async (req, res) => {
-  let [results, fields] = await db.query(queries.create, [req.body.firstName, req.body.lastName, req.body.email, req.body.phone]);
+  const email = req.body.email === "" ? null : req.body.email
+  const phone = req.body.phone === "" ? null : req.body.phone
+  let [results, fields] = await db.query(queries.create, [req.body.firstName, req.body.lastName, email, phone]);
   if (results.affectedRows != 1)
     console.log("create failed");
 
@@ -26,7 +28,9 @@ custRouter.post('/create', async (req, res) => {
 // update customer entry data
 custRouter.post('/update', async (req, res) => {
   if (req.body.ID !== '0') {
-    let [results, fields] = await db.query(queries.update, [req.body.firstName, req.body.lastName, req.body.email, req.body.phone, req.body.ID]);
+    const email = req.body.email === "" ? null : req.body.email
+    const phone = req.body.phone === "" ? null : req.body.phone
+    let [results, fields] = await db.query(queries.update, [req.body.firstName, req.body.lastName, email, phone, req.body.ID]);
     if (results.affectedRows != 1)
       console.log("update failed")
 
