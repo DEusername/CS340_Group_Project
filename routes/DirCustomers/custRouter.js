@@ -58,7 +58,7 @@ custRouter.post('/update', async (req, res) => {
       the customer record is unique to other existing emails or phone numbers`;
       }
       else
-        errMessage = `An unknown error occured with the creation of the record.`;
+        errMessage = `An unknown error occured with the updating of the record.`;
       res.render('customers', { message: errMessage })
       return
     }

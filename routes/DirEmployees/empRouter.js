@@ -66,7 +66,7 @@ empRouter.post('/update', async (req, res) => {
       the employee record is unique to other existing emails or phone numbers`;
       }
       else
-        errMessage = `An unknown error occured with the creation of the record.`;
+        errMessage = `An unknown error occured with the updating of the record.`;
       res.render('employees', { message: errMessage })
       return
     }

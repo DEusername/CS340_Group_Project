@@ -16,21 +16,47 @@ manRouter.get('/', async (req, res) => {
 
 // create manufacturer entry
 manRouter.post('/create', async (req, res) => {
-  let [results, fields] = await db.query(queries.create, [req.body.name, req.body.email, req.body.phone, req.body.address]);
-  if (results.affectedRows != 1)
-    console.log("create failed");
-
-  res.redirect('/manufacturers');
+  try {
+    let [results, fields] = await db.query(queries.create, [req.body.name, req.body.email, req.body.phone, req.body.address]);
+    if (results.affectedRows != 1)
+      console.log("create failed");
+    res.redirect('/manufacturers');
+    return
+  } catch (error) {
+    let errMessage;
+    if (error.code === 'ER_DUP_ENTRY') {
+      errMessage = `You attempted to enter either a duplicate field.
+      Please ensure that all of the fields you are attempting to use to create
+      the manufacturer record are unique to other existing manufacturer fields`;
+    }
+    else
+      errMessage = `An unknown error occured with the creation of the record.`;
+    res.render('manufacturers', { message: errMessage })
+    return
+  }
 });
 
 // update manufacturer entry data
 manRouter.post('/update', async (req, res) => {
   if (req.body.ID !== '0') {
-    let [results, fields] = await db.query(queries.update, [req.body.name, req.body.email, req.body.phone, req.body.address, req.body.ID]);
-    if (results.affectedRows != 1)
-      console.log("update failed");
-    res.redirect('/manufacturers');
-    return
+    try {
+      let [results, fields] = await db.query(queries.update, [req.body.name, req.body.email, req.body.phone, req.body.address, req.body.ID]);
+      if (results.affectedRows != 1)
+        console.log("update failed");
+      res.redirect('/manufacturers');
+      return
+    } catch (error) {
+      let errMessage;
+      if (error.code === 'ER_DUP_ENTRY') {
+        errMessage = `You attempted to enter either a duplicate field.
+      Please ensure that all of the fields you are attempting to use to update
+      the manufacturer record are unique to other existing manufacturer fields`;
+      }
+      else
+        errMessage = `An unknown error occured with the updating of the record.`;
+      res.render('manufacturers', { message: errMessage })
+      return
+    }
   }
   else {
     let nonValMessage;
