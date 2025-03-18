@@ -26,9 +26,8 @@ npm install
 cd routes
 touch db-connector.js
 ```
-- Then ensure that it has the same contents as `ex-db-connector.js`, where `&lt;HOST&gt;` is swapped for the hosting server name, `&lt;USERNAME&gt;` is swapped for the username you are going to use to connect to the database, `&lt;PASSWORD&gt;` is swapped to the associated password for your username, and `&lt;DATABASE&gt;` is swapped with the database name you are going to connect to.
-- Import the database tables into the database used for `&lt;DATABASE&gt;` using the `creation.sql` file to create the Employees, Customers, Sales, SaleHasClothes, Clothes, and Manufacturers tables that are required for the database management system to run.
-
+- Then ensure that it has the same contents as `ex-db-connector.js`, where `<HOST>` is swapped for the hosting server name, `<USERNAME>` is swapped for the username you are going to use to connect to the database, `<PASSWORD>` is swapped to the associated password for your username, and `<DATABASE>` is swapped with the database name you are going to connect to.
+- Import the database tables into the database used for `<DATABASE>` using the `creation.sql` file to create the Employees, Customers, Sales, SaleHasClothes, Clothes, and Manufacturers tables that are required for the database management system to run.
 
 ## Usage
 To run the project, use the following command:
@@ -38,15 +37,9 @@ npm run start
 
 ## Contributing
 1. Fork the repository.
-2. Create a new branch: 
-```bash 
-git checkout -b feature-name
-```
+2. Create a new branch: `git checkout -b feature-name`
 3. Make your changes.
-4. Push your branch: 
-```bash 
-git push origin feature-name
-```
+4. Push your branch: `git push origin feature-name`
 5. Create a pull request.
 
 ## License
