@@ -173,8 +173,6 @@
       // Find the selected record
       const record = records.find(r => r.idClothes == selectedId);
       if (record) {
-
-        // confirmed it has all of the correct information. Why does it fail?
         inputs.name.value = record['name'] || '';
         inputs.category.value = record['category'] || '';
         inputs.size.value = record['size'] || 'non-value';
